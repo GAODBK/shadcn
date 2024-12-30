@@ -1,12 +1,15 @@
 // src/app/(dashboard)/page.ts
-import React from 'react';
+'use client';
+import React, {useEffect} from 'react';
+import {useRouter} from "next/navigation";
 
 const Page = () => {
-    return (
-        <div>
+    const router = useRouter()
+    useEffect(() => {
+        router.replace(`/dashboard`)
+    }, [])
 
-        </div>
-    );
+    return null
 };
 
 export default Page;

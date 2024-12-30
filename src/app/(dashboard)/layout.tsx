@@ -12,7 +12,7 @@ export default function Layout({
             <div className={`hidden md:flex h-full w-64 flex-col fixed inset-y-0 z-50`}>
                 <Sidebar/>
             </div>
-            <main>
+            <main className={`ml-64 p-4`}>
                 {children}
             </main>
         </div>

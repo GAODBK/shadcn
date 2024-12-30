@@ -161,3 +161,320 @@ const Sidebar = () => {
 export default Sidebar;
 ```
 
+```typescript jsx
+// src/app/(dashboard)/_components/sidebar-search-input.tsx
+import React, {useState} from 'react';
+import {Input} from "@/components/ui/input";
+import {GoPlus} from "react-icons/go";
+
+import {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+    CommandSeparator,
+    CommandShortcut,
+} from "@/components/ui/command"
+
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+import {FiClock} from "react-icons/fi";
+import {TiPen} from "react-icons/ti";
+import {BsJournalBookmark} from "react-icons/bs";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import {FcDocument} from "react-icons/fc";
+import {LuTableProperties} from "react-icons/lu";
+import {LuClipboardPenLine} from "react-icons/lu";
+import {GrDocumentText} from "react-icons/gr";
+import {BsClipboardData} from "react-icons/bs";
+import {LuBookMarked} from "react-icons/lu";
+import {FcPuzzle} from "react-icons/fc";
+import {FcViewDetails} from "react-icons/fc";
+import {FcImport} from "react-icons/fc";
+import {RiRobot2Line} from "react-icons/ri";
+
+const SidebarSearchInput = () => {
+
+    return (
+        <div className={`flex items-center gap-x-2 mx-4`}>
+            <Dialog>
+                <DialogTrigger asChild>
+                    <Input className={`cursor-pointer h-8 bg-gray-200/40`}/>
+                </DialogTrigger>
+                <DialogContent className={`p-0`}>
+                    <Command className="rounded-lg border shadow-md md:min-w-[450px]">
+                        <CommandInput placeholder="Type a command or search..."/>
+                        <CommandList>
+                            <CommandEmpty>No results found.</CommandEmpty>
+                            <CommandGroup heading="页面">
+                                <CommandItem>
+                                    <FiClock/>
+                                    <span>开始</span>
+                                </CommandItem>
+                                <CommandItem>
+                                    <TiPen/>
+                                    <span>小记</span>
+                                </CommandItem>
+                            </CommandGroup>
+                            <CommandSeparator/>
+                            <CommandGroup heading="知识库">
+                                <CommandItem>
+                                    <BsJournalBookmark/>
+                                    <span>知识库1</span>
+                                </CommandItem>
+                            </CommandGroup>
+                        </CommandList>
+                    </Command>
+                </DialogContent>
+            </Dialog>
+            <div
+                className={`h-8 w-10 cursor-pointer border rounded-md flex items-center justify-center bg-white`}
+            >
+                <DropdownMenu>
+                    <DropdownMenuTrigger>
+                        <GoPlus className={`size-6`}/>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className={`py-4 px-2`}>
+                        <DropdownMenuItem>
+                            <GrDocumentText/>
+                            文档
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                            <LuTableProperties/>
+                            {/*<FcViewDetails/>*/}
+                            表格
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                            <LuClipboardPenLine/>
+                            画板
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                            <BsClipboardData/>
+                            数据表
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator/>
+                        <DropdownMenuItem>
+                            <LuBookMarked/>
+                            知识库
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator/>
+                        <DropdownMenuItem>
+                            <FcPuzzle/>
+                            从模板新建
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                            <RiRobot2Line/>
+                            Ai帮你写
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                            <FcImport/>
+                            导入
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            </div>
+        </div>
+    );
+};
+
+export default SidebarSearchInput;
+```
+
+```typescript jsx
+// src/app/(dashboard)/_components/sidebar-routes.tsx
+'use client';
+import React from 'react';
+import {FiClock} from "react-icons/fi";
+import {TiPen} from "react-icons/ti";
+import {Clock, Flower, PenLine, Sparkles} from 'lucide-react'
+import SidebarItem from "@/app/(dashboard)/_components/sidebar-item";
+
+const routes = [
+    {
+        icon: FiClock,
+        label: "开始",
+        href: '/dashboard',
+    },
+    {
+        icon: TiPen,
+        label: "小记",
+        href: '/dashboard/notes'
+    },
+    {
+        icon: Sparkles,
+        label: "收藏",
+        href: '/dashboard/collections'
+    },
+    {
+        icon: Flower,
+        label: "逛逛",
+        href: '/dashboard/explore'
+    }
+]
+
+const SidebarRoutes = () => {
+    return (
+        <div className={`flex flex-col w-full`}>
+            {routes.map(r => (
+                <SidebarItem
+                    key={r.href}
+                    icon={r.icon}
+                    href={r.href}
+                    label={r.label}
+                />
+            ))}
+        </div>
+    )
+        ;
+};
+
+export default SidebarRoutes;
+```
+
+```typescript jsx
+// src/app/(dashboard)/_components/sidebar-knowledge-library-item.tsx
+'use client';
+import React from 'react';
+import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion";
+import Link from "next/link";
+import {Ellipsis, GripVertical} from "lucide-react";
+import {BsJournalBookmark} from "react-icons/bs";
+import {useRouter} from "next/navigation";
+
+const SidebarKnowledgeLibraryItem = () => {
+    const router = useRouter()
+
+    return (
+        <div className={`px-2`}>
+            <Accordion
+                type="single" collapsible>
+                <AccordionItem
+                    onDoubleClick={() => router.push(`/`)}
+                    value="item-1">
+                    <AccordionTrigger
+                        className={`py-3 hover:no-underline rounded-md bg-gray-200/40 px-4`}
+                    >
+                        知识库
+                    </AccordionTrigger>
+                    <AccordionContent className={`py-2 px-2`}>
+                        <div className={`flex flex-col`}>
+                            <Link
+                                href={``}
+                                className={`cursor-pointer group items-center flex flex-row justify-between
+                                                 hover:bg-slate-300/40 p-2 rounded-md`}>
+                                <GripVertical className={`mr-1 size-4 group-hover:inline hidden`}/>
+                                <div className={`mr-1 size-4 block group-hover:hidden`}/>
+                                <div className={`flex-1 flex flex-row items-center gap-x-1`}>
+                                    <BsJournalBookmark className={`size-5`}/>
+                                    <span className={``}>
+                                            知识库1
+                                        </span>
+                                </div>
+                                <Ellipsis className={`group-hover:block hidden`}/>
+                            </Link>
+                            <Link
+                                href={``}
+                                className={`cursor-pointer group items-center flex flex-row justify-between
+                                                 hover:bg-slate-300/40 p-2 rounded-md`}>
+                                <GripVertical className={`mr-1 size-4 group-hover:inline hidden`}/>
+                                <div className={`mr-1 size-4 block group-hover:hidden`}/>
+                                <div className={`flex-1 flex flex-row items-center gap-x-1`}>
+                                    <BsJournalBookmark className={`size-5`}/>
+                                    <span className={``}>
+                                            知识库2
+                                        </span>
+                                </div>
+                                <Ellipsis className={`group-hover:block hidden`}/>
+                            </Link>
+                            <Link
+                                href={``}
+                                className={`cursor-pointer group items-center flex flex-row justify-between
+                                                 hover:bg-slate-300/40 p-2 rounded-md`}>
+                                <GripVertical className={`mr-1 size-4 group-hover:inline hidden`}/>
+                                <div className={`mr-1 size-4 block group-hover:hidden`}/>
+                                <div className={`flex-1 flex flex-row items-center gap-x-1`}>
+                                    <BsJournalBookmark className={`size-5`}/>
+                                    <span className={``}>
+                                            知识库3
+                                        </span>
+                                </div>
+                                <Ellipsis className={`group-hover:block hidden`}/>
+                            </Link>
+                        </div>
+                    </AccordionContent>
+                </AccordionItem>
+            </Accordion>
+        </div>
+    );
+};
+
+export default SidebarKnowledgeLibraryItem;
+```
+
+```typescript jsx
+// src/app/(dashboard)/_components/sidebar-knowledge-group-item.tsx
+'use client';
+import React from 'react';
+import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion";
+import Link from "next/link";
+import {Ellipsis, GripVertical} from "lucide-react";
+import {BsJournalBookmark} from "react-icons/bs";
+import {useRouter} from "next/navigation";
+
+const SidebarKnowledgeGroupItem = () => {
+    const router = useRouter()
+
+    return (
+        <div className={`px-2`}>
+            <Accordion
+                type="single" collapsible>
+                <AccordionItem
+                    onDoubleClick={() => router.push(`/`)}
+                    value="item-1">
+                    <AccordionTrigger
+                        className={`py-3 hover:no-underline rounded-md bg-gray-200/40 px-4`}
+                    >
+                        知识小组
+                    </AccordionTrigger>
+                    <AccordionContent className={`py-2 px-2`}>
+                        <div className={`flex flex-col`}>
+                            <Link
+                                href={``}
+                                className={`cursor-pointer group items-center flex flex-row justify-between
+                                                 hover:bg-slate-300/40 p-2 rounded-md`}>
+                                <GripVertical className={`mr-1 size-4 group-hover:inline hidden`}/>
+                                <div className={`mr-1 size-4 block group-hover:hidden`}/>
+                                <div className={`flex-1 flex flex-row items-center gap-x-1`}>
+                                    <BsJournalBookmark className={`size-5`}/>
+                                    <span className={``}>
+                                            知识小组1
+                                        </span>
+                                </div>
+                                <Ellipsis className={`group-hover:block hidden`}/>
+                            </Link>
+                        </div>
+                    </AccordionContent>
+                </AccordionItem>
+            </Accordion>
+        </div>
+    );
+};
+
+export default SidebarKnowledgeGroupItem;
+```
