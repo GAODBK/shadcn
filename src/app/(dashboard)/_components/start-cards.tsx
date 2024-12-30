@@ -6,33 +6,21 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip"
-
 import {HiOutlineDocumentPlus} from "react-icons/hi2";
 import {HiOutlineChevronDown} from "react-icons/hi";
-import {DropdownMenuItem, DropdownMenuSeparator} from "@/components/ui/dropdown-menu";
 import {GrDocumentText} from "react-icons/gr";
 import {LuBookMarked, LuClipboardPenLine, LuTableProperties} from "react-icons/lu";
 import {BsClipboardData} from "react-icons/bs";
 import {FcImport, FcPuzzle} from "react-icons/fc";
-import {RiRobot2Line} from "react-icons/ri";
 import {Separator} from "@/components/ui/separator";
 import {LuBookPlus} from "react-icons/lu";
-import {Button} from '@/components/ui/button'
 import StartCardNewKnowledgeLibrary from "@/app/(dashboard)/_components/start-card-new-knowledge-library";
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
 import StartCardTemplateDialogContent from "@/app/(dashboard)/_components/start-card-template-dialog-content";
-import {
-    ResizableHandle,
-    ResizablePanel,
-    ResizablePanelGroup,
-} from "@/components/ui/resizable"
 
 
 const StartCards = () => {
@@ -79,7 +67,7 @@ const StartCards = () => {
                         <div
                             className={`rounded-md mx-1 py-3 cursor-pointer px-4 hover:bg-slate-300/30 flex items-center gap-x-2`}>
                             <FcImport className={`size-4`}/>
-                            <span>新建导入</span>
+                            <span>导入</span>
                         </div>
                     </TooltipContent>
                 </Tooltip>
@@ -102,7 +90,7 @@ const StartCards = () => {
                     </div>
                 </DialogTrigger>
                 <DialogContent className={`w-screen`}>
-                            <StartCardTemplateDialogContent/>
+                    <StartCardTemplateDialogContent/>
                 </DialogContent>
             </Dialog>
 
