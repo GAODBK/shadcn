@@ -1,5 +1,5 @@
 // src/app/(dashboard)/_components/start-hover-cards.tsx
-import React from 'react';
+import React, {useState} from 'react';
 import {
     Tooltip,
     TooltipContent,
@@ -15,63 +15,35 @@ import {FcImport, FcPuzzle} from "react-icons/fc";
 import {Separator} from "@/components/ui/separator";
 import {LuBookPlus} from "react-icons/lu";
 import StartCardNewKnowledgeLibrary from "@/app/(dashboard)/_components/start-card-new-knowledge-library";
+import StartCardTemplateDialogContent from "@/app/(dashboard)/_components/start-card-template-dialog-content";
+import {
+    Command,
+    CommandDialog,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+    CommandSeparator,
+    CommandShortcut,
+} from "@/components/ui/command"
 import {
     Dialog,
     DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import StartCardTemplateDialogContent from "@/app/(dashboard)/_components/start-card-template-dialog-content";
+import StarCardNewDocumentItem from "@/app/(dashboard)/_components/star-card-new-document-item";
 
 
 const StartCards = () => {
+
     return (
         <div className={`p-4 pt-2 flex items-center gap-x-4`}>
-            <TooltipProvider>
-                <Tooltip>
-                    <TooltipTrigger className={`w-[16vw] border rounded-md p-3`}>
-                        {/*新建文档*/}
-                        <div className={`flex items-center gap-x-2`}>
-                            <HiOutlineDocumentPlus className={`m-2 size-5`}/>
-                            <div className={`flex flex-col items-start`}>
-                                <span className={`text-sm font-semibold`}>新建文档</span>
-                                <span className={`text-xs text-slate-400/80`}>
-                                文档、表格、画板、数据表
-                            </span>
-                            </div>
-                            <HiOutlineChevronDown className={`ml-2 size-4`}/>
-                        </div>
-                    </TooltipTrigger>
-                    <TooltipContent className={`pl-8 bg-white p-1 text-black w-[16vw] border`}>
-                        <div
-                            className={`mt-2 rounded-md mx-1 py-3 cursor-pointer px-4 hover:bg-slate-300/30 flex items-center gap-x-2`}>
-                            <GrDocumentText className={`size-4`}/>
-                            <span>新建文档</span>
-                        </div>
-                        <div
-                            className={`rounded-md mx-1 py-3 cursor-pointer px-4 hover:bg-slate-300/30 flex items-center gap-x-2`}>
-                            <LuTableProperties className={`size-4`}/>
-                            {/*<FcViewDetails/>*/}
-                            <span>新建表格</span>
-                        </div>
-                        <div
-                            className={`rounded-md mx-1 py-3 cursor-pointer px-4 hover:bg-slate-300/30 flex items-center gap-x-2`}>
-                            <LuClipboardPenLine className={`size-4`}/>
-                            <span>新建画板</span>
-                        </div>
-                        <div
-                            className={`rounded-md mx-1 py-3 cursor-pointer px-4 hover:bg-slate-300/30 flex items-center gap-x-2`}>
-                            <BsClipboardData className={`size-4`}/>
-                            <span>新建数据表</span>
-                        </div>
-                        <Separator className={`m-2`}/>
-                        <div
-                            className={`rounded-md mx-1 py-3 cursor-pointer px-4 hover:bg-slate-300/30 flex items-center gap-x-2`}>
-                            <FcImport className={`size-4`}/>
-                            <span>导入</span>
-                        </div>
-                    </TooltipContent>
-                </Tooltip>
-            </TooltipProvider>
+            <StarCardNewDocumentItem/>
+
             {/*新建知识库*/}
             <StartCardNewKnowledgeLibrary/>
             {/*模板中心*/}
