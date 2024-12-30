@@ -1,7 +1,7 @@
 // src/app/(dashboard)/_components/notes-list.tsx
 import React from 'react';
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs"
-import IEditedNotesTable from "@/app/(dashboard)/_components/IEditedNotesTable";
+import NotesListEditedNotesTable from "@/app/(dashboard)/_components/notes-list-edited-notes-table";
 
 const NotesList = () => {
 
@@ -15,7 +15,7 @@ const NotesList = () => {
                     <TabsTrigger value="commented">我评论过</TabsTrigger>
                 </TabsList>
                 <TabsContent value="edited">
-                    <IEditedNotesTable/>
+                    <NotesListEditedNotesTable/>
                 </TabsContent>
                 <TabsContent value="viewed">
                     <div>

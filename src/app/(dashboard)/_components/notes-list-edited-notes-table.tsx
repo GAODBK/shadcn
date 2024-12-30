@@ -25,7 +25,7 @@ import {PiBroom} from "react-icons/pi";
 import {CiShare1} from "react-icons/ci";
 import Link from "next/link";
 
-const IEditedNotesTable = () => {
+const NotesListEditedNotesTable = () => {
     return (
         <Table className={`w-full`}>
             <TableCaption>查看更多</TableCaption>
@@ -88,4 +88,4 @@ const IEditedNotesTable = () => {
     );
 };
 
-export default IEditedNotesTable;
+export default NotesListEditedNotesTable;
