@@ -18,9 +18,10 @@ const SidebarKnowledgeGroupItem = () => {
                     onDoubleClick={() => router.push(`/`)}
                     value="item-1">
                     <AccordionTrigger
+                        title={'双击进入知识小组首页'}
                         className={`py-3 hover:no-underline rounded-md bg-gray-200/40 px-4`}
                     >
-                        知识小组
+                        <span>知识小组</span>
                     </AccordionTrigger>
                     <AccordionContent className={`py-2 px-2`}>
                         <div className={`flex flex-col`}>

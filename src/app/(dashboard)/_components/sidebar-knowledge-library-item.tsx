@@ -3,9 +3,11 @@
 import React from 'react';
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion";
 import Link from "next/link";
-import {Ellipsis, GripVertical} from "lucide-react";
+import {ChevronDownIcon, Ellipsis, GripVertical} from "lucide-react";
 import {BsJournalBookmark} from "react-icons/bs";
 import {useRouter} from "next/navigation";
+import {FaAngleRight} from "react-icons/fa6";
+import {AccordionHeader} from "@radix-ui/react-accordion";
 
 const SidebarKnowledgeLibraryItem = () => {
     const router = useRouter()
@@ -18,9 +20,10 @@ const SidebarKnowledgeLibraryItem = () => {
                     onDoubleClick={() => router.push(`/`)}
                     value="item-1">
                     <AccordionTrigger
+                        title={'双击进入知识库首页'}
                         className={`py-3 hover:no-underline rounded-md bg-gray-200/40 px-4`}
                     >
-                        知识库
+                        <span>知识库</span>
                     </AccordionTrigger>
                     <AccordionContent className={`py-2 px-2`}>
                         <div className={`flex flex-col`}>
