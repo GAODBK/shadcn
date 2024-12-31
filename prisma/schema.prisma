@@ -18,6 +18,8 @@ model Library {
   id          String @id @default(cuid())
   name        String
   description String
+  // 首页内容
+  text        String @db.LongText
 
   childrenLibrary Library[] @relation("ParentChildrenLibrary")
   // 级联删除
