@@ -22,4 +22,12 @@ pnpm dlx shadcn@latest add --all
 
 ```shell
 pnpm dlx prisma@5 init
+pnpm dlx prisma@5 generate
+pnpm dlx prisma@5 db push
+```
+
+# tiptap mantine-ui
+
+```shell
+pnpm install @mantine/tiptap @mantine/core @mantine/hooks @tiptap/react @tiptap/pm @tiptap/extension-link @tiptap/starter-kit
 ```

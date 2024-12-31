@@ -17,7 +17,7 @@ const SidebarKnowledgeLibraryItem = () => {
             <Accordion
                 type="single" collapsible>
                 <AccordionItem
-                    onDoubleClick={() => router.push(`/`)}
+                    onDoubleClick={() => router.push(`/dashboard/library`)}
                     value="item-1">
                     <AccordionTrigger
                         title={'双击进入知识库首页'}
