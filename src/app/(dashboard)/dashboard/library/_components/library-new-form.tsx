@@ -1,6 +1,6 @@
 // src/app/(dashboard)/dashboard/library/_components/library-new-form.tsx
 'use client';
-import React, {useState} from 'react';
+import React  from 'react';
 import {
     Dialog,
     DialogContent,

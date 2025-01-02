@@ -31,3 +31,9 @@ pnpm dlx prisma@5 db push
 ```shell
 pnpm install @mantine/tiptap @mantine/core @mantine/hooks @tiptap/react @tiptap/pm @tiptap/extension-link @tiptap/starter-kit
 ```
+
+# sass
+
+```shell
+pnpm i sass
+```

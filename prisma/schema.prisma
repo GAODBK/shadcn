@@ -15,11 +15,13 @@ datasource db {
 
 // 知识库
 model Library {
-  id          String @id @default(cuid())
+  id          String  @id @default(cuid())
   name        String
   description String
   // 首页内容
-  text        String @db.LongText
+  text        String  @db.LongText
+  // 首页显示目录模块
+  showDir     Boolean
 
   childrenLibrary Library[] @relation("ParentChildrenLibrary")
   // 级联删除
@@ -27,7 +29,9 @@ model Library {
   parentLibraryId String?
 
   createdAt DateTime @default(now())
-  Note      Note[]
+
+  Note  Note[]
+  Group Group[]
 }
 
 // 知识库分组
@@ -40,6 +44,9 @@ model Group {
   // 级联删除
   parentGroup   Group?  @relation("ParentChildrenGroup", fields: [parentGroupId], references: [id], onDelete: Cascade)
   parentGroupId String?
+
+  libraryId String
+  library   Library @relation(fields: [libraryId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

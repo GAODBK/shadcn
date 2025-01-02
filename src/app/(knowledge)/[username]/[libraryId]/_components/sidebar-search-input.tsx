@@ -1,7 +1,7 @@
-// src/app/(dashboard)/_components/sidebar-search-input.tsx
+// src/app/(knowledge)/[username]/[libraryId]/_components/sidebar-search-input.tsx
+import React from 'react';
+import {Dialog, DialogContent, DialogTrigger} from "@/components/ui/dialog";
 import {Input} from "@/components/ui/input";
-import {GoPlus} from "react-icons/go";
-
 import {
     Command,
     CommandEmpty,
@@ -9,38 +9,25 @@ import {
     CommandInput,
     CommandItem,
     CommandList,
-    CommandSeparator,
-    CommandShortcut,
-} from "@/components/ui/command"
-
-import {
-    Dialog,
-    DialogContent,
-    DialogTrigger,
-} from "@/components/ui/dialog"
+    CommandSeparator
+} from "@/components/ui/command";
 import {FiClock} from "react-icons/fi";
 import {TiPen} from "react-icons/ti";
-import {BsJournalBookmark} from "react-icons/bs";
+import {BsClipboardData, BsJournalBookmark} from "react-icons/bs";
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
     DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {FcDocument} from "react-icons/fc";
-import {LuTableProperties} from "react-icons/lu";
-import {LuClipboardPenLine} from "react-icons/lu";
+    DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
+import {GoPlus} from "react-icons/go";
 import {GrDocumentText} from "react-icons/gr";
-import {BsClipboardData} from "react-icons/bs";
-import {LuBookMarked} from "react-icons/lu";
-import {FcPuzzle} from "react-icons/fc";
-import {FcImport} from "react-icons/fc";
+import {LuBookMarked, LuClipboardPenLine, LuTableProperties} from "react-icons/lu";
+import {FcImport, FcPuzzle} from "react-icons/fc";
 import {RiRobot2Line} from "react-icons/ri";
 
 const SidebarSearchInput = () => {
-
     return (
         <div className={`flex items-center gap-x-2 mx-4`}>
             <Dialog>
@@ -53,21 +40,8 @@ const SidebarSearchInput = () => {
                         <CommandList>
                             <CommandEmpty>No results found.</CommandEmpty>
                             <CommandGroup heading="页面">
-                                <CommandItem>
-                                    <FiClock/>
-                                    <span>开始</span>
-                                </CommandItem>
-                                <CommandItem>
-                                    <TiPen/>
-                                    <span>小记</span>
-                                </CommandItem>
-                            </CommandGroup>
-                            <CommandSeparator/>
-                            <CommandGroup heading="知识库">
-                                <CommandItem>
-                                    <BsJournalBookmark/>
-                                    <span>知识库1</span>
-                                </CommandItem>
+                                {/*todo: library children*/}
+
                             </CommandGroup>
                         </CommandList>
                     </Command>

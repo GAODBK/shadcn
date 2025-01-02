@@ -5,6 +5,10 @@ const nextConfig = {
         // [webpack.cache.PackFileCacheStrategy] Serializing big strings (145kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
         optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
     },
+    sassOptions: {
+        // silenceDeprecations: ['legacy-js-api'],
+        silenceDeprecations: ['modern-compiler'],
+    }
 };
 
 export default nextConfig;

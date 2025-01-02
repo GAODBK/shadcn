@@ -1,32 +1,8 @@
 // src/app/(dashboard)/_components/start-hover-cards.tsx
-import React, {useState} from 'react';
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "@/components/ui/tooltip"
-import {HiOutlineDocumentPlus} from "react-icons/hi2";
-import {HiOutlineChevronDown} from "react-icons/hi";
-import {GrDocumentText} from "react-icons/gr";
-import {LuBookMarked, LuClipboardPenLine, LuTableProperties} from "react-icons/lu";
-import {BsClipboardData} from "react-icons/bs";
-import {FcImport, FcPuzzle} from "react-icons/fc";
-import {Separator} from "@/components/ui/separator";
+import React from 'react';
 import {LuBookPlus} from "react-icons/lu";
 import StartCardNewKnowledgeLibrary from "@/app/(dashboard)/_components/start-card-new-knowledge-library";
 import StartCardTemplateDialogContent from "@/app/(dashboard)/_components/start-card-template-dialog-content";
-import {
-    Command,
-    CommandDialog,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-    CommandList,
-    CommandSeparator,
-    CommandShortcut,
-} from "@/components/ui/command"
 import {
     Dialog,
     DialogContent,

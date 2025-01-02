@@ -1,5 +1,5 @@
 // src/app/(dashboard)/_components/star-card-new-document-item.tsx
-import React, {useState} from 'react';
+import React  from 'react';
 import {GrDocumentText} from "react-icons/gr";
 import {LuClipboardPenLine, LuTableProperties} from "react-icons/lu";
 import {BsClipboardData} from "react-icons/bs";
