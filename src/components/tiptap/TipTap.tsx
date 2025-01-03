@@ -158,7 +158,7 @@ const TipTap = ({description, onChange, slug, onSubmit}: {
                 className={`h-14 character-count items-center my-4 flex gap-x-2`}>
                 {editor?.storage.characterCount.characters()} 字符数
                 {' '}
-                {editor?.storage.characterCount.words()} 字数
+                {editor?.storage.characterCount.words()} 词数
                 <button
                     className={`w-14 h-8 text-sm rounded-md text-white bg-green-600`}
                     onClick={() => onSubmit()}>

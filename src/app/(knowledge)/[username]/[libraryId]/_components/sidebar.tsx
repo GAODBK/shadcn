@@ -17,7 +17,15 @@ const Sidebar = async ({libraryId}: { libraryId: string }) => {
     } = await db.library.findUnique({
         where: {id: libraryId},
         include: {
-            Note: true,
+            Note: {
+                where: {
+                    parentNoteId: null,
+                    groupId: null
+                },
+                include: {
+                    childrenNote: true
+                }
+            },
             Group: true
         }
     })
@@ -41,6 +49,7 @@ const Sidebar = async ({libraryId}: { libraryId: string }) => {
             </div>
             <SidebarDirList
                 libraryId={libraryId}
+                // @ts-ignore
                 notes={library?.Note}
                 groups={library?.Group}
             />

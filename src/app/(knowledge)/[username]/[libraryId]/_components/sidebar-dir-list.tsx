@@ -7,17 +7,39 @@ import {ScrollArea} from "@/components/ui/scroll-area"
 import {Note, Group} from '@prisma/client';
 import {cn} from "@/lib/utils";
 import {createNote} from "@/app/(knowledge)/[username]/[libraryId]/actions/create-note";
-import {useRouter} from "next/navigation";
+import {
+    createNote as createNoteWithParent
+} from "@/app/(knowledge)/[username]/[libraryId]/[noteId]/actions/create-note";
+import {usePathname, useRouter} from "next/navigation";
 import Link from "next/link";
+
+import {
+    ContextMenu,
+    ContextMenuContent,
+    ContextMenuItem,
+    ContextMenuTrigger,
+} from "@/components/ui/context-menu"
+import {Input} from "@/components/ui/input";
+import {updateNote} from "@/app/(knowledge)/[username]/[libraryId]/[noteId]/actions/update-note";
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion"
+
 
 const SidebarDirList = ({libraryId, notes, groups}: {
     libraryId: string
     notes: Note[]
-    groups: Group[]
+    groups: Group[] // todo
 }) => {
     const router = useRouter()
+    const pathname = usePathname()
 
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(true)
+    const [editingId, setEditingId] = useState<string | null>(null)
+    const [name, setName] = useState<string | null>()
 
     const onClick = async () => {
         const note = await createNote({libraryId})
@@ -51,13 +73,160 @@ const SidebarDirList = ({libraryId, notes, groups}: {
                 {open && (notes.length === 0 || groups.length === 0) && (
                     <div className={`w-full p-1`}>
                         {notes.map(n => (
-                            <div
-                                className={`w-full text-sm p-2 hover:bg-gray-300/30 rounded-md`}
-                                key={n.id}>
-                                <Link href={`/malred/${libraryId}/${n.id}`}>
-                                    {n.name}
-                                </Link>
-                            </div>
+                            <>
+                                {/*@ts-ignore*/}
+                                {(!editingId || editingId !== n.id) && n.childrenNote.length === 0 &&
+                                    <ContextMenu>
+                                        <ContextMenuTrigger>
+                                            <div
+                                                className={cn(
+                                                    `w-full text-sm p-2 hover:bg-gray-300/30 rounded-md`,
+                                                    pathname === `/malred/${libraryId}/${n.id}` && `bg-gray-300/30`
+                                                )}
+                                                key={n.id}>
+                                                <Link href={`/malred/${libraryId}/${n.id}`}>
+                                                    {n.name}
+                                                </Link>
+                                            </div>
+                                        </ContextMenuTrigger>
+                                        <ContextMenuContent>
+                                            <ContextMenuItem
+                                                onClick={() => setEditingId(n.id)}
+                                            >
+                                                重命名
+                                            </ContextMenuItem>
+                                            <ContextMenuItem
+                                                onClick={async () => {
+                                                    const note = await createNoteWithParent({
+                                                        libraryId,
+                                                        parentNoteId: n.id
+                                                    })
+                                                    router.push(`/malred/${libraryId}/${note.id}`)
+                                                }}
+                                            >
+                                                新建文档
+                                            </ContextMenuItem>
+                                        </ContextMenuContent>
+                                    </ContextMenu>}
+                                {/*@ts-ignore*/}
+                                {(!editingId || editingId !== n.id) && n.childrenNote.length !== 0 &&
+                                    <Accordion type="single" collapsible>
+                                        <AccordionItem value="item-1" className={`p-0 border-none`}>
+                                            <AccordionTrigger className={`p-0 border-none`}>
+                                                <ContextMenu>
+                                                    <ContextMenuTrigger>
+                                                        <div
+                                                            className={cn(
+                                                                `w-full text-sm p-2 hover:bg-gray-300/30 rounded-md`,
+                                                                pathname === `/malred/${libraryId}/${n.id}` && `bg-gray-300/30`
+                                                            )}
+                                                            key={n.id}>
+                                                            <Link href={`/malred/${libraryId}/${n.id}`}>
+                                                                {n.name}
+                                                            </Link>
+                                                        </div>
+                                                    </ContextMenuTrigger>
+                                                    <ContextMenuContent>
+                                                        <ContextMenuItem
+                                                            onClick={() => setEditingId(n.id)}
+                                                        >
+                                                            重命名
+                                                        </ContextMenuItem>
+                                                        <ContextMenuItem
+                                                            onClick={async () => {
+                                                                const note = await createNoteWithParent({
+                                                                    libraryId,
+                                                                    parentNoteId: n.id
+                                                                })
+                                                                router.push(`/malred/${libraryId}/${note.id}`)
+                                                                router.refresh()
+                                                            }}
+                                                        >
+                                                            新建文档
+                                                        </ContextMenuItem>
+                                                    </ContextMenuContent>
+                                                </ContextMenu>
+                                            </AccordionTrigger>
+                                            <AccordionContent className={`space-y-1 py-1 border-none`}>
+                                                {/*@ts-ignore*/}
+                                                {n.childrenNote.map((item: Note) =>
+                                                    <>
+                                                        {!editingId && <ContextMenu>
+                                                            <ContextMenuTrigger>
+                                                                <div
+                                                                    className={cn(
+                                                                        `w-full text-sm p-2 hover:bg-gray-300/30 rounded-md`,
+                                                                        pathname === `/malred/${libraryId}/${item.id}` && `bg-gray-300/30`
+                                                                    )}
+                                                                    key={item.id}>
+                                                                    <Link href={`/malred/${libraryId}/${item.id}`}>
+                                                                        {item.name}
+                                                                    </Link>
+                                                                </div>
+                                                            </ContextMenuTrigger>
+                                                            <ContextMenuContent>
+                                                                <ContextMenuItem
+                                                                    onClick={() => setEditingId(item.id)}
+                                                                >
+                                                                    重命名
+                                                                </ContextMenuItem>
+                                                                <ContextMenuItem
+                                                                    onClick={async () => {
+                                                                        const note = await createNoteWithParent({
+                                                                            libraryId,
+                                                                            parentNoteId: item.id
+                                                                        })
+                                                                        router.push(`/malred/${libraryId}/${note.id}`)
+                                                                        router.refresh()
+                                                                    }}
+                                                                >
+                                                                    新建文档
+                                                                </ContextMenuItem>
+                                                            </ContextMenuContent>
+                                                        </ContextMenu>}
+                                                        {editingId && editingId === item.id && (
+                                                            <Input
+                                                                onKeyDown={async (e) => {
+                                                                    if (e.key === 'Enter') {
+                                                                        await updateNote({
+                                                                            id: editingId,
+                                                                            name: name!
+                                                                        })
+                                                                        setName(null)
+                                                                        setEditingId(null)
+                                                                        router.refresh()
+                                                                    }
+                                                                }}
+                                                                onBlur={() => setEditingId(null)}
+                                                                value={name || item.name}
+                                                                onChange={(e) => setName(e.target.value)}
+                                                            />
+                                                        )}
+                                                    </>
+                                                )}
+                                            </AccordionContent>
+                                        </AccordionItem>
+                                    </Accordion>
+                                }
+                                {editingId && editingId === n.id && (
+                                    <Input
+                                        onKeyDown={async (e) => {
+                                            if (e.key === 'Enter') {
+                                                await updateNote({
+                                                    id: editingId,
+                                                    name: name!
+                                                })
+                                                setName(null)
+                                                setEditingId(null)
+                                                router.refresh()
+                                            }
+                                        }}
+                                        onBlur={() => setEditingId(null)}
+                                        value={name || n.name}
+                                        onChange={(e) => setName(e.target.value)}
+                                    />
+                                )}
+                            </>
                         ))}
                     </div>
                 )}
