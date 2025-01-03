@@ -158,7 +158,7 @@ export const TiptapExtensions = [
     Video,
     MathNode,
     DrawioExtension,
-    ExcalidrawExtension,
+    // ExcalidrawExtension,
 ]
 
 

@@ -113,7 +113,7 @@ const BarItems = ({editor, isBubble = false, isFloat = false}) => {
                 <RichTextEditor.Control>
                     <MathButton editor={editor}/>
                     <DrawioBarItem editor={editor} />
-                    <ExcalidrawBarItem editor={editor} />
+                    {/*<ExcalidrawBarItem editor={editor} />*/}
                 </RichTextEditor.Control>
             </RichTextEditor.ControlsGroup>
 
