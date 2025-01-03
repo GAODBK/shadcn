@@ -91,6 +91,7 @@ const Page = async ({params, searchParams}: {
                 <NoteHomeHeader
                     libraryId={params.libraryId}
                     id={note?.id!}
+                    text={note?.text! || ''}
                     name={note?.name!}/>
                 <div className={`flex size-full`}>
                     {(searchParams.type !== 'both' &&
@@ -106,6 +107,7 @@ const Page = async ({params, searchParams}: {
                         }
                         <div className={`px-6 py-2 w-full`}>
                             <div
+                                id={`tiptap-content`}
                                 className={`p-12 w-full prose-lg`}
                                 dangerouslySetInnerHTML={{
                                     __html
