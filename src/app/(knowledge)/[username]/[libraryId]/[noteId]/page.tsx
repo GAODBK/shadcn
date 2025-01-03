@@ -96,9 +96,14 @@ const Page = async ({params, searchParams}: {
                     {(searchParams.type !== 'both' &&
                         searchParams.type !== 'edit'
                     ) && <div className={`size-full flex-1 p-4`}>
-                        {!note?.name && <h1 className={`mx-6 my-1 mb-2 text-4xl font-semibold`}>
-                            无标题文档
-                        </h1>}
+                        {(!note?.name || note?.name === '无标题文档') ?
+                            <h1 className={`mx-6 my-1 mb-2 text-4xl font-semibold`}>
+                                无标题文档
+                            </h1> :
+                            !note?.text && <h1 className={`mx-6 my-1 mb-2 text-4xl font-semibold`}>
+                                {note?.name}
+                            </h1>
+                        }
                         <div className={`px-6 py-2 w-full`}>
                             <div
                                 className={`p-12 w-full prose-lg`}

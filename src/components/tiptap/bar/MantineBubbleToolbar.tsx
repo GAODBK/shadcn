@@ -6,6 +6,8 @@ import {RichTextEditor} from '@mantine/tiptap';
 import FontHighLightBarItem from "@/components/tiptap/item/FontHighLightBarItem";
 import FontColorBarItem from "@/components/tiptap/item/FontColorBarItem";
 import LineHeightBarItem from "@/components/tiptap/item/LineHeightBarItem";
+import FileUploadToLinkBarItem from "@/components/tiptap/item/FileUploadToLinkBarItem";
+import {addFileLinkWrapper} from "@/lib/utils";
 
 type Props = {
     editor: Editor | null
@@ -14,16 +16,7 @@ type Props = {
 export default function MantineBubbleToolbar({editor}: Props) {
     if (!editor)
         return null
-
-    // const {slug} = useSlugStore()
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    // const addImage = addImageWrapper(editor, slug)
-
-    // const setLink = setLinkWrapper(editor)
-
-    // const handleAudioGenerateClick = handleAudioGenerateClickWrapper(editor)
-
-    // const addFileLink = addFileLinkWrapper(editor)
+    const addFileLink = addFileLinkWrapper(editor)
 
     return (
         <>
@@ -43,11 +36,7 @@ export default function MantineBubbleToolbar({editor}: Props) {
                         <RichTextEditor.Strikethrough/>
                         <RichTextEditor.ClearFormatting/>
                         {/*<RichTextEditor.Highlight />*/}
-                        <RichTextEditor.Control
-                            // onClick={() => editor?.commands.insertContent('⭐')}
-                            // aria-label="Insert star emoji"
-                            // title="Insert star emoji"
-                        >
+                        <RichTextEditor.Control>
                             <FontHighLightBarItem size={'sm'}/>
                         </RichTextEditor.Control>
                         <RichTextEditor.Control
@@ -56,7 +45,7 @@ export default function MantineBubbleToolbar({editor}: Props) {
                         </RichTextEditor.Control>
                         <RichTextEditor.Control
                         >
-                            <LineHeightBarItem />
+                            <LineHeightBarItem/>
                         </RichTextEditor.Control>
 
                         <RichTextEditor.Subscript/>
@@ -64,6 +53,12 @@ export default function MantineBubbleToolbar({editor}: Props) {
 
                         <RichTextEditor.Link/>
                         <RichTextEditor.Unlink/>
+
+                        <RichTextEditor.Control>
+                            <FileUploadToLinkBarItem
+                                addFileLink={addFileLink}
+                                editor={editor}/>
+                        </RichTextEditor.Control>
                     </RichTextEditor.ControlsGroup>
                 </BubbleMenu>
             )}

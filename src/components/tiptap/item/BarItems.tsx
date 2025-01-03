@@ -3,7 +3,7 @@ import {RichTextEditor} from "@mantine/tiptap";
 
 // import CodeBarItem from "@/components/tiptap/bar/item/CodeBarItem";
 import FontHighLightBarItem from "@/components/tiptap/item/FontHighLightBarItem";
-import {House} from "lucide-react";
+import {FileIcon, House} from "lucide-react";
 import TableBarItem from "@/components/tiptap/item/TableBarItem";
 import FontColorBarItem from "@/components/tiptap/item/FontColorBarItem";
 import ImageBarItem from "@/components/tiptap/item/ImageBarItem";
@@ -12,6 +12,7 @@ import EmojiPickerBarItem from "@/components/tiptap/item/EmojiPickerBarItem";
 import MathButton from "@/components/tiptap/item/MathButton";
 import FontSizeBarItem from "@/components/tiptap/item/FontSizeBarItem";
 import {useRouter} from "next/navigation";
+import {addFileLinkWrapper} from "@/lib/utils";
 
 // @ts-ignore
 const BarItems = ({editor, isBubble = false, isFloat = false}) => {
