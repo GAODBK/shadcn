@@ -2,6 +2,7 @@
 'use client';
 import React, {useRef} from 'react';
 import {saveAs} from 'file-saver';
+// @ts-ignore
 import htmlDocx from 'html-docx-js/dist/html-docx';
 import {PiMicrosoftWordLogoFill} from "react-icons/pi";
 
