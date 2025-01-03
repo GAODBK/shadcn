@@ -8,6 +8,7 @@ import {Note, Group} from '@prisma/client';
 import {cn} from "@/lib/utils";
 import {createNote} from "@/app/(knowledge)/[username]/[libraryId]/actions/create-note";
 import {useRouter} from "next/navigation";
+import Link from "next/link";
 
 const SidebarDirList = ({libraryId, notes, groups}: {
     libraryId: string
@@ -24,7 +25,7 @@ const SidebarDirList = ({libraryId, notes, groups}: {
     }
 
     return (
-        <div className={`px-5`}>
+        <div className={`px-5 w-full`}>
             <div className={`flex justify-between`}>
                 <div className={`flex gap-x-2`}>
                     <CiFolderOn className={`size-5`}/>
@@ -48,7 +49,17 @@ const SidebarDirList = ({libraryId, notes, groups}: {
                     </div>
                 )}
                 {open && (notes.length === 0 || groups.length === 0) && (
-                    <div>a</div>
+                    <div className={`w-full p-1`}>
+                        {notes.map(n => (
+                            <div
+                                className={`w-full text-sm p-2 hover:bg-gray-300/30 rounded-md`}
+                                key={n.id}>
+                                <Link href={`/malred/${libraryId}/${n.id}`}>
+                                    {n.name}
+                                </Link>
+                            </div>
+                        ))}
+                    </div>
                 )}
             </ScrollArea>
         </div>

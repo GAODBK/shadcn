@@ -118,6 +118,38 @@ const Page = async ({params, searchParams}: {
     }
 
     // @ts-ignore
+    function renderMathInText(text) {
+        const dom = new JSDOM(text);
+        const doc = dom.window.document;
+
+        const mathSpans = doc.querySelectorAll('span[data-type="math"]');
+
+        mathSpans.forEach(span => {
+            const latex = span.getAttribute('content');
+            try {
+                const html = katex.renderToString(latex!, {
+                    throwOnError: false
+                });
+                // 居中
+                const parent = span.parentElement;
+
+                // @ts-ignore
+                parent.style.display = 'flex';
+                // @ts-ignore
+                parent.style.justifyContent = 'center';
+                // @ts-ignore
+                parent.style.alignItems = 'center';
+                // 内容
+                span.innerHTML = html;
+            } catch (error) {
+                console.error('Error rendering LaTeX:', error);
+            }
+        });
+
+        return doc.body.innerHTML;
+    }
+
+    // @ts-ignore
     const library: Library & {
         Note: Note[]
         Group: Group[]
@@ -130,64 +162,67 @@ const Page = async ({params, searchParams}: {
     })
 
     return (
-        <div className={`bg-white mx-24 my-16 min-h-[70vh] rounded-md`}>
-            {searchParams.type !== 'edit' && (
-                <>
-                    <div className={`flex p-8 justify-between items-center`}>
-                        <div className={`flex gap-x-2 items-center`}>
-                            <BsJournalBookmark className={`text-blue-500 size-8`}/>
-                            {searchParams.type !== 'rename' ?
-                                <text className={`font-bold text-2xl`}>{library?.name}</text> :
-                                <HomepageRenameInput library={library}/>
-                            }
+        <div className={`h-full bg-gray-300/30 p-4`}>
+            <div className={`bg-white mx-24 my-16 min-h-[70vh] rounded-md`}>
+                {searchParams.type !== 'edit' && (
+                    <>
+                        <div className={`flex p-8 justify-between items-center`}>
+                            <div className={`flex gap-x-2 items-center`}>
+                                <BsJournalBookmark className={`text-blue-500 size-8`}/>
+                                {searchParams.type !== 'rename' ?
+                                    <text className={`font-bold text-2xl`}>{library?.name}</text> :
+                                    <HomepageRenameInput library={library}/>
+                                }
+                            </div>
+                            <div className={`flex items-center gap-x-2`}>
+                                <>
+                                    <div className={`p-2 border flex items-center rounded-md`}>
+                                        <TiStarOutline className={``}/>
+                                        <span className={`text-sm`}>收藏</span>
+                                    </div>
+                                    <div className={`p-2 border flex items-center rounded-md`}>
+                                        <span className={`text-sm`}>分享</span>
+                                    </div>
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger>
+                                            <HiEllipsisHorizontal className={`cursor-pointer size-6 m-1`}/>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent>
+                                            <DropdownMenuItem>
+                                                <Link href={`/malred/${library.id}?type=rename`}>
+                                                    重命名
+                                                </Link>
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem>
+                                                <Link href={`/malred/${library.id}?type=edit`}>
+                                                    编辑首页
+                                                </Link>
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem>更多设置</DropdownMenuItem>
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
+                                </>
+                            </div>
                         </div>
-                        <div className={`flex items-center gap-x-2`}>
-                            <>
-                                <div className={`p-2 border flex items-center rounded-md`}>
-                                    <TiStarOutline className={``}/>
-                                    <span className={`text-sm`}>收藏</span>
-                                </div>
-                                <div className={`p-2 border flex items-center rounded-md`}>
-                                    <span className={`text-sm`}>分享</span>
-                                </div>
-                                <DropdownMenu>
-                                    <DropdownMenuTrigger>
-                                        <HiEllipsisHorizontal className={`cursor-pointer size-6 m-1`}/>
-                                    </DropdownMenuTrigger>
-                                    <DropdownMenuContent>
-                                        <DropdownMenuItem>
-                                            <Link href={`/malred/${library.id}?type=rename`}>
-                                                重命名
-                                            </Link>
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem>
-                                            <Link href={`/malred/${library.id}?type=edit`}>
-                                                编辑首页
-                                            </Link>
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem>更多设置</DropdownMenuItem>
-                                    </DropdownMenuContent>
-                                </DropdownMenu>
-                            </>
+                        <div className={`h-full p-4 w-full`}>
+                            <div className={`w-full prose-base md:prose-lg px-4 rounded-md`}>
+                                <div
+                                    dangerouslySetInnerHTML={{
+                                        __html:
+                                            renderMathInText(
+                                                renderRichTextWithHighlightServerside(library.text)
+                                            )
+                                    }}
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <div className={`h-full p-4 w-full`}>
-                        <div className={`w-full prose-base md:prose-lg px-4 rounded-md`}>
-                            <div
-                                dangerouslySetInnerHTML={{
-                                    __html:
-                                        renderRichTextWithHighlightServerside(library.text)
-                                }}
-                            />
-                        </div>
-                    </div>
-                </>)}
-            {searchParams.type === 'edit' && (
-                <EditHomepage library={library}/>
-            )}
+                    </>)}
+                {searchParams.type === 'edit' && (
+                    <EditHomepage library={library}/>
+                )}
+            </div>
         </div>
     )
-        ;
 };
 
 export default Page;

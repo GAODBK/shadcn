@@ -7,7 +7,7 @@ const nextConfig = {
     },
     sassOptions: {
         // silenceDeprecations: ['legacy-js-api'],
-        silenceDeprecations: ['modern-compiler'],
+        silenceDeprecations: ['modern'],
     }
 };
 

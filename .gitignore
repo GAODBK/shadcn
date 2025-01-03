@@ -27,6 +27,8 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
+
 
 # vercel
 .vercel
@@ -34,3 +36,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+/public/uploads/无标题文档123/微信图片_20241024081142.jpg
+/public/
+/public/*
+/public/**
+/public/**/*
+/public/*/*

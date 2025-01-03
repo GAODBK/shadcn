@@ -53,6 +53,10 @@ import ImageResize from 'tiptap-extension-resize-image'
 import Underline from "@tiptap/extension-underline";
 import HardBreak from '@tiptap/extension-hard-break'
 import CodeBlockComponent from "@/components/tiptap/extensions/CodeBlockComponent";
+import Video from "@/components/tiptap/extensions/VideoNode";
+import {MathNode} from "@/components/tiptap/extensions/MathNode";
+import {LineHeightExtension} from "@/components/tiptap/extensions/line-height";
+import {FontSizeExtension} from "@/components/tiptap/extensions/font-size";
 
 export const TiptapExtensions = [
     // 浏览器中可以拖动内容到其他位置, tauri中不行
@@ -68,6 +72,8 @@ export const TiptapExtensions = [
     // }
     // }),
     // StarterKit,
+    LineHeightExtension,
+    FontSizeExtension,
     CodeBlockLowlight
         .extend({
             addNodeView() {
@@ -145,5 +151,63 @@ export const TiptapExtensions = [
     TextAlign.configure({
         types: ['heading', 'paragraph'],
     }),
-    AudioNode,
+    // AudioNode,
+    Video,
+    MathNode,
 ]
+
+
+
+const buttonStyle = {
+    backgroundColor: '#007bff',
+    color: 'white',
+    border: 'none',
+    borderRadius: '5px',
+    padding: '10px 15px',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s',
+    marginRight: '5px',
+};
+
+const chatBoxStyle = {
+    border: '1px solid #ccc',
+    borderRadius: '8px',
+    padding: '10px',
+    backgroundColor: 'white',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    overflow: 'hidden',
+};
+
+const messageContainerStyle = {
+    overflowY: 'auto',
+    // marginBottom: '10px',
+    marginBottom: '30px',
+};
+
+const msgStyle = {
+    display: 'inline-block',
+    padding: '5px 10px',
+    borderRadius: '5px',
+    backgroundColor: '#f1f1f1',
+    maxWidth: '80%',
+    wordWrap: 'break-word',
+};
+
+const inputStyle = {
+    width: 'calc(100% - 80px)',
+    padding: '8px',
+    marginRight: '5px',
+    borderRadius: '5px',
+    border: '1px solid #ccc',
+};
+
+const sendButtonStyle = {
+    backgroundColor: '#28a745',
+    color: 'white',
+    border: 'none',
+    borderRadius: '5px',
+    padding: '8px 15px',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s',
+};
+export {buttonStyle, chatBoxStyle, msgStyle, sendButtonStyle, inputStyle, messageContainerStyle, TextStyle}

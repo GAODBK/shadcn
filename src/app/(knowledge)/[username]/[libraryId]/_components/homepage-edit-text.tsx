@@ -4,13 +4,6 @@ import React from 'react';
 import {Library} from "@prisma/client";
 import {RichTextEditor, Link} from '@mantine/tiptap';
 import {BubbleMenu, EditorContent, FloatingMenu, useEditor} from '@tiptap/react';
-import Highlight from '@tiptap/extension-highlight';
-import StarterKit from '@tiptap/starter-kit';
-import Underline from '@tiptap/extension-underline';
-import TextAlign from '@tiptap/extension-text-align';
-import Superscript from '@tiptap/extension-superscript';
-import SubScript from '@tiptap/extension-subscript';
-import {FaBold, FaItalic} from "react-icons/fa";
 import {
     Select,
     SelectContent,
@@ -20,6 +13,7 @@ import {
 } from "@/components/ui/select"
 import '@mantine/core/styles.css';
 import {TiptapExtensions} from "@/lib/constants";
+import EmojiPickerBarItem from "@/components/tiptap/item/EmojiPickerBarItem";
 
 const HomepageEditText = ({text, setText}: {
     text: string
@@ -90,6 +84,12 @@ const HomepageEditText = ({text, setText}: {
                         <RichTextEditor.ClearFormatting/>
                         <RichTextEditor.Highlight/>
                         <RichTextEditor.Code/>
+                        <RichTextEditor.Control
+                            aria-label="Insert emoji"
+                            title="Insert emoji"
+                        >
+                            <EmojiPickerBarItem/>
+                        </RichTextEditor.Control>
                     </RichTextEditor.ControlsGroup>
                 </RichTextEditor.Toolbar>
 

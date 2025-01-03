@@ -16,9 +16,9 @@ const Layout = ({children, params}: {
             <div className={`hidden md:flex h-full w-64 flex-col fixed inset-y-0 z-50`}>
                 <Sidebar libraryId={params.libraryId}/>
             </div>
-            <main className={`h-full bg-gray-300/30 ml-64 p-4`}>
+            <div className={`h-full ml-64`}>
                 {children}
-            </main>
+            </div>
         </div>
     );
 };
