@@ -89,6 +89,7 @@ lowlight.register('ts', ts)
 
 import {JSDOM} from 'jsdom'
 import './style.scss'
+import HomepageDir from "@/app/(knowledge)/[username]/[libraryId]/_components/homepage-dir";
 
 const Page = async ({params, searchParams}: {
     params: {
@@ -156,7 +157,11 @@ const Page = async ({params, searchParams}: {
     } = await db.library.findUnique({
         where: {id: params.libraryId},
         include: {
-            Note: true,
+            Note: {
+                where: {
+                    parentNoteId: null
+                }
+            },
             Group: true
         }
     })
@@ -216,6 +221,7 @@ const Page = async ({params, searchParams}: {
                                 />
                             </div>
                         </div>
+                        {library.showDir && <HomepageDir library={library}/>}
                     </>)}
                 {searchParams.type === 'edit' && (
                     <EditHomepage library={library}/>

@@ -7,6 +7,7 @@ import NoteEdit from "@/app/(knowledge)/[username]/[libraryId]/[noteId]/_compone
 import {JSDOM} from "jsdom";
 import hljs from "highlight.js";
 import katex from "katex";
+import {generateOutlineLevel} from "@/lib/utils";
 
 const Page = async ({params, searchParams}: {
     params: {
@@ -70,6 +71,20 @@ const Page = async ({params, searchParams}: {
 
     const note = await db.note.findUnique({where: {id: params.noteId}})
 
+    const richText = renderRichTextWithHighlightServerside(renderMathInText(note?.text || '')
+    )
+    // let {full: __html} = generateOutlineLevel(richText)
+    const data = await fetch(`http://localhost:3000/api/outline/generate`, {
+        method: 'POST',
+        body: JSON.stringify({
+            richText
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    const {full: __html} = await data.json();
+
     return (
         <div className={`size-full flex`}>
             <div className={`size-full bg-white flex flex-col`}>
@@ -88,10 +103,7 @@ const Page = async ({params, searchParams}: {
                             <div
                                 className={`p-12 w-full prose-lg`}
                                 dangerouslySetInnerHTML={{
-                                    __html:
-                                        renderMathInText(
-                                            renderRichTextWithHighlightServerside(note?.text!)
-                                        )
+                                    __html
                                 }}/>
                             {!note?.text && (
                                 <span>暂无内容</span>
