@@ -58,6 +58,9 @@ import {MathNode} from "@/components/tiptap/extensions/MathNode";
 import {LineHeightExtension} from "@/components/tiptap/extensions/line-height";
 import {FontSizeExtension} from "@/components/tiptap/extensions/font-size";
 
+import DrawioExtension from '@/components/tiptap/extensions/DrawioExtension'
+import ExcalidrawExtension from '@/components/tiptap/extensions/ExcalidrawExtension'
+
 export const TiptapExtensions = [
     // 浏览器中可以拖动内容到其他位置, tauri中不行
     // StarterKit.configure({
@@ -154,6 +157,8 @@ export const TiptapExtensions = [
     // AudioNode,
     Video,
     MathNode,
+    DrawioExtension,
+    ExcalidrawExtension,
 ]
 
 

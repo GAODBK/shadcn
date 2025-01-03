@@ -12,6 +12,7 @@
   "dependencies": {
     "@auth/core": "^0.37.4",
     "@auth/prisma-adapter": "^2.7.4",
+    "@excalidraw/excalidraw": "^0.17.6",
     "@hello-pangea/dnd": "^17.0.0",
     "@heroicons/react": "^1.0.6",
     "@hocuspocus/cli": "^2.14.0",

@@ -99,3 +99,53 @@ body {
         @apply bg-background text-foreground;
     }
 }
+
+
+.tiptap-link {
+    color: #7aa2f7;
+    /*text-decoration: #2ac3de;*/
+    text-decoration-line: underline;
+}
+
+.pointer-events-none {
+    pointer-events: none;
+}
+
+
+/* 隐藏默认控件 */
+audio {
+    width: 100%;
+    height: 30px;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* 自定义控件样式 */
+.audio-player::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 30px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+.audio-player::after {
+    content: '🔊 Play';
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    font-size: 14px;
+    color: #333;
+    pointer-events: none;
+}
+
+.audio-player:hover::before {
+    background-color: #ddd;
+}
+
+.audio-player:hover::after {
+    color: #000;
+}

@@ -13,6 +13,8 @@ import MathButton from "@/components/tiptap/item/MathButton";
 import FontSizeBarItem from "@/components/tiptap/item/FontSizeBarItem";
 import {useRouter} from "next/navigation";
 import {addFileLinkWrapper} from "@/lib/utils";
+import DrawioBarItem from "@/components/tiptap/item/DrawioBarItem";
+import ExcalidrawBarItem from "@/components/tiptap/item/ExcalidrawBarItem";
 
 // @ts-ignore
 const BarItems = ({editor, isBubble = false, isFloat = false}) => {
@@ -110,6 +112,8 @@ const BarItems = ({editor, isBubble = false, isFloat = false}) => {
                 </RichTextEditor.Control>
                 <RichTextEditor.Control>
                     <MathButton editor={editor}/>
+                    <DrawioBarItem editor={editor} />
+                    <ExcalidrawBarItem editor={editor} />
                 </RichTextEditor.Control>
             </RichTextEditor.ControlsGroup>
 

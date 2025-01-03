@@ -37,3 +37,5 @@ pnpm install @mantine/tiptap @mantine/core @mantine/hooks @tiptap/react @tiptap/
 ```shell
 pnpm i sass
 ```
+
+todo: 首页从数据库读数据, 知识库首页sidebar面包屑
