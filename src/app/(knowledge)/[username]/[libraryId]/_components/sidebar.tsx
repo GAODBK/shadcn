@@ -19,16 +19,62 @@ const Sidebar = async ({libraryId}: { libraryId: string }) => {
         include: {
             Note: {
                 where: {
-                    parentNoteId: null,
-                    groupId: null
-                },
-                include: {
-                    childrenNote: true
+                    parentNoteId: null
                 }
             },
             Group: true
+            // Note: {
+            //     where: {
+            //         parentNoteId: null,
+            //         groupId: null
+            //     },
+            //     include: {
+            //         childrenNote: true
+            //     }
+            // },
         }
     })
+
+    async function getNotes(id: string): Promise<null | Note> {
+        let node = await db.note.findUnique({
+            where: {id},
+            include: {
+                childrenNote: {
+                    where: {
+                        parentNoteId: id,
+                    },
+                },
+            },
+        });
+
+        if (!node) {
+            // @ts-ignore
+            return {};
+        }
+
+        if (node.childrenNote.length > 0) {
+            let children = []
+            // 遍历childrenNote
+            for (let child of node.childrenNote) {
+                // 获取childrenNote的child
+                const childNodes = await getNotes(child.id);
+                // @ts-ignore
+                children.push(childNodes)
+            }
+            // @ts-ignore
+            node.childrenNote = children
+        }
+
+        return node;
+    }
+
+    let notes: Note[] = []
+    if (library?.Note && library?.Note.length > 0) {
+        for (let note of library?.Note) {
+            // @ts-ignore
+            notes.push(await getNotes(note.id))
+        }
+    }
 
     return (
         <div className={`bg-gray-200/20 h-full border-r flex flex-col overflow-y-auto shadow-sm`}>
@@ -48,9 +94,10 @@ const Sidebar = async ({libraryId}: { libraryId: string }) => {
                 <SidebarHomeItem libraryId={libraryId}/>
             </div>
             <SidebarDirList
+                library={library}
                 libraryId={libraryId}
                 // @ts-ignore
-                notes={library?.Note}
+                notes={notes}
                 groups={library?.Group}
             />
         </div>
