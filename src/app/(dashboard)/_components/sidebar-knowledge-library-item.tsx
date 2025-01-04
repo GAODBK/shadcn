@@ -17,13 +17,15 @@ const SidebarKnowledgeLibraryItem = () => {
             <Accordion
                 type="single" collapsible>
                 <AccordionItem
-                    onDoubleClick={() => router.push(`/dashboard/library`)}
+                    // onDoubleClick={() => router.push(`/dashboard/library`)}
                     value="item-1">
                     <AccordionTrigger
-                        title={'双击进入知识库首页'}
+                        // title={'双击进入知识库首页'}
                         className={`py-3 hover:no-underline rounded-md bg-gray-200/40 px-4`}
                     >
-                        <span>知识库</span>
+                        <Link href={`/dashboard/library`}>
+                            <span className={`p-1 hover:bg-gray-300/40`}>知识库</span>
+                        </Link>
                     </AccordionTrigger>
                     <AccordionContent className={`py-2 px-2`}>
                         <div className={`flex flex-col`}>

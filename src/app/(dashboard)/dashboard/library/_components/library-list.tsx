@@ -4,36 +4,16 @@ import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {Ellipsis, GripVertical} from "lucide-react";
 import {BsJournalBookmark} from "react-icons/bs";
 import Link from "next/link";
-import {MdFormatListBulleted} from "react-icons/md";
-import {AiOutlineAppstore} from "react-icons/ai";
-import {Separator} from "@/components/ui/separator";
-import {FiPlus} from "react-icons/fi";
-import {IoChevronDownOutline} from "react-icons/io5";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger} from "@/components/ui/dialog";
-import {LuBookPlus} from "react-icons/lu";
-import {Input} from "@/components/ui/input";
-import {Textarea} from "@/components/ui/textarea";
-import {Button} from "@/components/ui/button";
-import LibraryNewForm from "@/app/(dashboard)/dashboard/library/_components/library-new-form";
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "@/components/ui/tooltip"
 import LibraryListNewIcons from "@/app/(dashboard)/dashboard/library/_components/library-list-new-icons";
 import LibraryListToggleView from "@/app/(dashboard)/dashboard/library/_components/library-list-toggle-view";
+import {Library, Note} from "@prisma/client";
+import {format} from "date-fns";
 
 // todo: 根据view渲染列表或分组card
-const LibraryList = ({view}: { view: string }) => {
+const LibraryList = ({view, libraries}: {
+    view: string;
+    libraries: Library[]
+}) => {
 
     return (
         <div className={`px-4 py-3`}>
@@ -51,11 +31,11 @@ const LibraryList = ({view}: { view: string }) => {
                     </TabsList>
                 </div>
                 <TabsContent value="my" className={`my-6 w-full flex-wrap flex flex-row items-center gap-4`}>
-                    {[1, 2, 3, 4, 5].map(i => (
-                        <div key={i}
+                    {libraries && libraries.map(i => (
+                        <div key={i.id}
                              className={`rounded-md h-44 border flex flex-col`}>
                             <Link
-                                href={``}
+                                href={`/malred/${i.id}`}
                                 className={`h-20 w-96 cursor-pointer group items-center 
                                             flex flex-row justify-between
                                             bg-white p-2 rounded-md`}>
@@ -63,10 +43,10 @@ const LibraryList = ({view}: { view: string }) => {
                                     <BsJournalBookmark className={`size-6`}/>
                                     <div className={`flex flex-col justify-center`}>
                                         <span className={``}>
-                                            知识库1
+                                            {i.name}
                                         </span>
                                         <span className={`text-sm text-slate-600/60`}>
-                                            简介
+                                            {i.description}
                                         </span>
                                     </div>
                                 </div>
@@ -76,15 +56,21 @@ const LibraryList = ({view}: { view: string }) => {
                                 </div>
                             </Link>
                             <ul className={`mb-4 pl-5 pr-4 space-y-2`}>
-                                {[1, 2, 3].map(i => (
-                                    <li key={i} className={`cursor-pointer list-disc mx-4`}>
-                                        <div className={`flex justify-between 
-                                        hover:text-slate-600
-                                        text-sm text-slate-600/60`}>
-                                            {/*<span className={`mr-2 font-bold`}>·</span>*/}
-                                            <span className={``}>1111</span>
-                                            <span>2024-01-01</span>
-                                        </div>
+                                {/*@ts-ignore*/}
+                                {i.Note && i.Note.slice(0, 3).map((n: Note) => (
+                                    <li key={n.id}
+                                        className={`cursor-pointer list-disc mx-4`}>
+                                        <Link href={`/malred/${i.id}/${n.id}`}>
+                                            <div
+                                                className={`
+                                            flex justify-between hover:text-slate-600 text-sm text-slate-600/60
+                                            `}>
+                                                {/*<span className={`mr-2 font-bold`}>·</span>*/}
+                                                <span className={``}>{n.name}</span>
+                                                {/*<span>{format(n.createdAt, 'yyyy-MM-dd HH:mm:ss')}</span>*/}
+                                                <span>{format(n.createdAt, 'yyyy-MM-dd HH:mm')}</span>
+                                            </div>
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>

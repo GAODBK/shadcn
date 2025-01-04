@@ -5,8 +5,9 @@ import {Library, Note} from "@prisma/client";
 import HomepageDirItem from "@/app/(knowledge)/[username]/[libraryId]/_components/homepage-dir-item";
 
 const HomepageDir = async ({library}: { library: Library & { Note: Note[] } }) => {
+
     async function getNotes(id: string): Promise<null | Note> {
-        const node = await db.note.findUnique({
+        let node = await db.note.findUnique({
             where: {id},
             include: {
                 childrenNote: {
@@ -23,11 +24,16 @@ const HomepageDir = async ({library}: { library: Library & { Note: Note[] } }) =
         }
 
         if (node.childrenNote.length > 0) {
-            for (const child of node.childrenNote) {
+            let children = []
+            // 遍历childrenNote
+            for (let child of node.childrenNote) {
+                // 获取childrenNote的child
                 const childNodes = await getNotes(child.id);
                 // @ts-ignore
-                child.childrenNote = childNodes;
+                children.push(childNodes)
             }
+            // @ts-ignore
+            node.childrenNote = children
         }
 
         return node;
