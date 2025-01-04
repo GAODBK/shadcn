@@ -45,7 +45,7 @@ const ExportPdfItem = ({title}: { title: string }) => {
 
 
     return (
-        <div onClick={generatePDF} className={`cursor-point flex flex-col items-center`}>
+        <div onClick={generatePDF} className={`cursor-pointer flex flex-col items-center`}>
             <GrDocumentPdf className={`size-20`}/>
             <span>PDF</span>
             <span className={`text-sm text-gray-400`}>.pdf</span>

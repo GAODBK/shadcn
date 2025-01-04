@@ -2,8 +2,13 @@
 import React from 'react';
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs"
 import NotesListEditedNotesTable from "@/app/(dashboard)/_components/notes-list-edited-notes-table";
+import {db} from "@/lib/db";
 
-const NotesList = () => {
+const NotesList = async () => {
+    const notes = await db.note.findMany({
+        orderBy: {updatedAt: "desc"},
+        include: {library: true}
+    })
 
     return (
         <div className={`p-4 pt-0`}>
@@ -15,7 +20,7 @@ const NotesList = () => {
                     <TabsTrigger value="commented">我评论过</TabsTrigger>
                 </TabsList>
                 <TabsContent value="edited">
-                    <NotesListEditedNotesTable/>
+                    <NotesListEditedNotesTable notes={notes}/>
                 </TabsContent>
                 <TabsContent value="viewed">
                     <div>

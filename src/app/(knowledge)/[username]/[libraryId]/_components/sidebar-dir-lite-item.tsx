@@ -43,10 +43,10 @@ const SidebarDirLiteItem = ({notes, libraryId, level = 0}: {
                     {(item.childrenNote && item.childrenNote.length > 0) && (
                         <>
                             {(!editingId) && (
-                                <Accordion key={item.id} type="single" collapsible>
+                                <Accordion type="single" collapsible>
                                     <AccordionItem value="item-1" className={`p-0 border-none`}>
-                                        <AccordionTrigger className={`p-0 border-none`}>
-                                            <ContextMenu key={item.id}>
+                                        <AccordionTrigger key={item.id} className={`p-0 border-none`}>
+                                            <ContextMenu>
                                                 <ContextMenuTrigger>
                                                     <div
                                                         className={cn(
@@ -93,6 +93,7 @@ const SidebarDirLiteItem = ({notes, libraryId, level = 0}: {
                                         </AccordionTrigger>
                                         <AccordionContent className={`space-y-1 py-1 border-none`}>
                                             <SidebarDirLiteItem
+                                                key={item.id}
                                                 libraryId={libraryId}
                                                 // @ts-ignore
                                                 notes={item.childrenNote}
@@ -102,21 +103,21 @@ const SidebarDirLiteItem = ({notes, libraryId, level = 0}: {
                                     </AccordionItem>
                                 </Accordion>)}
                             {editingId && editingId === item.id && (
-                                <Input
-                                    onKeyDown={async (e) => {
-                                        if (e.key === 'Enter') {
-                                            await updateNote({
-                                                id: editingId,
-                                                name: name!
-                                            })
-                                            setName(null)
-                                            setEditingId(null)
-                                            router.refresh()
-                                        }
-                                    }}
-                                    onBlur={() => setEditingId(null)}
-                                    value={name || item.name}
-                                    onChange={(e) => setName(e.target.value)}
+                                <Input key={item.id}
+                                       onKeyDown={async (e) => {
+                                           if (e.key === 'Enter') {
+                                               await updateNote({
+                                                   id: editingId,
+                                                   name: name!
+                                               })
+                                               setName(null)
+                                               setEditingId(null)
+                                               router.refresh()
+                                           }
+                                       }}
+                                       onBlur={() => setEditingId(null)}
+                                       value={name || item.name}
+                                       onChange={(e) => setName(e.target.value)}
                                 />
                             )}
                         </>
@@ -125,8 +126,8 @@ const SidebarDirLiteItem = ({notes, libraryId, level = 0}: {
                     {(!item.childrenNote || item.childrenNote.length === 0) && (
                         <>
                             {!editingId && (
-                                <ContextMenu key={item.id}>
-                                    <ContextMenuTrigger>
+                                <ContextMenu>
+                                    <ContextMenuTrigger key={item.id}>
                                         <div
                                             className={cn(
                                                 `w-full text-sm p-2 pt-2 px-${level + 4}
@@ -169,21 +170,21 @@ const SidebarDirLiteItem = ({notes, libraryId, level = 0}: {
                                 </ContextMenu>
                             )}
                             {editingId && editingId === item.id && (
-                                <Input
-                                    onKeyDown={async (e) => {
-                                        if (e.key === 'Enter') {
-                                            await updateNote({
-                                                id: editingId,
-                                                name: name!
-                                            })
-                                            setName(null)
-                                            setEditingId(null)
-                                            router.refresh()
-                                        }
-                                    }}
-                                    onBlur={() => setEditingId(null)}
-                                    value={name || item.name}
-                                    onChange={(e) => setName(e.target.value)}
+                                <Input key={item.id}
+                                       onKeyDown={async (e) => {
+                                           if (e.key === 'Enter') {
+                                               await updateNote({
+                                                   id: editingId,
+                                                   name: name!
+                                               })
+                                               setName(null)
+                                               setEditingId(null)
+                                               router.refresh()
+                                           }
+                                       }}
+                                       onBlur={() => setEditingId(null)}
+                                       value={name || item.name}
+                                       onChange={(e) => setName(e.target.value)}
                                 />
                             )}
                         </>

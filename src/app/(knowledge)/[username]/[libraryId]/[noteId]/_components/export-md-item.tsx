@@ -31,7 +31,7 @@ const ExportMdItem = ({content, title}: {
 
     return (
         <div onClick={exportToDoc}
-             className={`cursor-point flex flex-col items-center`}>
+             className={`cursor-pointer flex flex-col items-center`}>
             <IoLogoMarkdown className={`size-20`}/>
             <span>Markdown</span>
             <span className={`text-sm text-gray-400`}>.md</span>

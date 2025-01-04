@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 import {CiFolderOn} from "react-icons/ci";
 import {IoIosArrowDown} from "react-icons/io";
 import {ScrollArea} from "@/components/ui/scroll-area"
-import {Note, Group,  Library} from '@prisma/client';
+import {Note, Group, Library} from '@prisma/client';
 import {cn} from "@/lib/utils";
 import {createNote} from "@/app/(knowledge)/[username]/[libraryId]/actions/create-note";
 import {

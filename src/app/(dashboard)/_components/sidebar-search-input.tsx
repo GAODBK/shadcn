@@ -38,8 +38,11 @@ import {LuBookMarked} from "react-icons/lu";
 import {FcPuzzle} from "react-icons/fc";
 import {FcImport} from "react-icons/fc";
 import {RiRobot2Line} from "react-icons/ri";
+import {db} from "@/lib/db";
+import Link from "next/link";
 
-const SidebarSearchInput = () => {
+const SidebarSearchInput = async () => {
+    const libraries = await db.library.findMany({})
 
     return (
         <div className={`flex items-center gap-x-2 mx-4`}>
@@ -49,25 +52,33 @@ const SidebarSearchInput = () => {
                 </DialogTrigger>
                 <DialogContent className={`p-0`}>
                     <Command className="rounded-lg border shadow-md md:min-w-[450px]">
-                        <CommandInput placeholder="Type a command or search..."/>
+                        <CommandInput placeholder="搜索内容"/>
                         <CommandList>
                             <CommandEmpty>No results found.</CommandEmpty>
                             <CommandGroup heading="页面">
-                                <CommandItem>
-                                    <FiClock/>
-                                    <span>开始</span>
-                                </CommandItem>
-                                <CommandItem>
-                                    <TiPen/>
-                                    <span>小记</span>
-                                </CommandItem>
+                                <Link href={`/dashboard`}>
+                                    <CommandItem className={`cursor-pointer`}>
+                                        <FiClock/>
+                                        <span>开始</span>
+                                    </CommandItem>
+                                </Link>
+                                <Link href={`/dashboard/notes`}>
+                                    <CommandItem className={`cursor-pointer`}>
+                                        <TiPen/>
+                                        <span>小记</span>
+                                    </CommandItem>
+                                </Link>
                             </CommandGroup>
                             <CommandSeparator/>
                             <CommandGroup heading="知识库">
-                                <CommandItem>
-                                    <BsJournalBookmark/>
-                                    <span>知识库1</span>
-                                </CommandItem>
+                                {libraries && libraries.map((item) => (
+                                    <Link href={`/malred/${item.id}`}>
+                                        <CommandItem className={`cursor-pointer`} key={item.id}>
+                                            <BsJournalBookmark/>
+                                            <span>{item.name}</span>
+                                        </CommandItem>
+                                    </Link>
+                                ))}
                             </CommandGroup>
                         </CommandList>
                     </Command>

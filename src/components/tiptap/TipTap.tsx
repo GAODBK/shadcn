@@ -3,7 +3,7 @@
 import Text from '@tiptap/extension-text'
 import React, {useEffect, useRef, useState} from 'react';
 import {useEditorStore} from "@/hooks/use-editor-store";
-import {EditorContent, useEditor} from "@tiptap/react";
+import {Editor, EditorContent, useEditor} from "@tiptap/react";
 import {TiptapExtensions} from '@/lib/constants';
 import {useCompletion} from "ai/react"; // pnpm i ai@3.4.33
 import {RichTextEditor, Link} from '@mantine/tiptap';
@@ -14,6 +14,7 @@ import {generateImage, generateImageAPI, pasteImage} from "@/lib/utils";
 import MantineFloatingToolbar from "@/components/tiptap/bar/MantineFloatingToolbar";
 import MantineBubbleToolbar from "@/components/tiptap/bar/MantineBubbleToolbar";
 import BarItems from "@/components/tiptap/item/BarItems";
+import {useDebounce} from "react-use";
 
 const TipTap = ({description, onChange, slug, onSubmit}: {
     description: string
@@ -127,16 +128,23 @@ const TipTap = ({description, onChange, slug, onSubmit}: {
     const {complete, completion} = useCompletion({
         api: 'http://localhost:3000/api/completion',
     })
-    const lastCompletion = useRef('')
-    useEffect(() => {
-        if (!editor || !completion) return
+    // const lastCompletion = useRef('')
+    const [lastCompletion, setLastCompletion] = useState('')
+    useDebounce(complete, 1000, [lastCompletion]);
+    const updateEditorCompletion = (completion: string, editor: Editor) => {
         // 新的completion(ai之前生成的sentence + ai生成的新的char) 减去 上次的completion的长度
         // 得出新的char
-        const diff = completion.slice(lastCompletion.current.length);
+        const diff = completion.slice(lastCompletion.length);
         // 更新lastCompletion
-        lastCompletion.current = completion;
+        // lastCompletion.current = completion;
+        setLastCompletion(completion)
         // 当前editor后面加上新char
         editor.commands.insertContent(diff);
+    }
+    useDebounce(updateEditorCompletion, 1000, [completion, editor]);
+    useEffect(() => {
+        if (!editor || !completion) return
+        updateEditorCompletion(completion, editor)
     }, [completion, editor])
 
     // 防止编辑器未加载时操作出错

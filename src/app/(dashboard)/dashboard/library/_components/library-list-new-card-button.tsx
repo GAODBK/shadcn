@@ -57,7 +57,7 @@ const LibraryListNewCardButton = () => {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <div className={`cursor-point mx-1 border rounded-md flex gap-x-1 items-center p-2 py-1`}>
+                <div className={`cursor-pointer mx-1 border rounded-md flex gap-x-1 items-center p-2 py-1`}>
                     <FaPlus className={`size-4`}/>
                     <span className={`text-sm`}>
                         新建知识库

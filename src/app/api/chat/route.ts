@@ -7,9 +7,11 @@ import {OpenAIStream, StreamingTextResponse} from "ai";
 
 const config = new Configuration({
     // apiKey: process.env.OPENAI_API_KEY,
-    apiKey: process.env.IFLYTEK_SPARK_APP_PASSWORD,
     // basePath: process.env.BASE_URL
-    basePath: process.env.IFLYTEK_SPARK_BATH_URL
+    // apiKey: process.env.IFLYTEK_SPARK_APP_PASSWORD,
+    // basePath: process.env.IFLYTEK_SPARK_BATH_URL
+    apiKey: process.env.ZHIPU_API_KEY,
+    basePath: "https://open.bigmodel.cn/api/paas/v4/"
 })
 const openai = new OpenAIApi(config)
 
@@ -18,7 +20,9 @@ export async function POST(req: NextRequest) {
     const {prompt} = await req.json()
 
     const response = await openai.createChatCompletion({
-        model: 'lite',
+        // model: 'lite',
+        model: 'glm-4-flash',  // zhipu
+        // model: 'lite',
         // model: 'gpt-4-turbo',
         // model:'gpt-4-all',
         // model: 'gpt-3.5-turbo',

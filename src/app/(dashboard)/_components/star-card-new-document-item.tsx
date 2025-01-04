@@ -54,7 +54,7 @@ const StarCardNewDocumentItem = async () => {
                     <div className={`flex items-center gap-x-2`}>
                         <HiOutlineDocumentPlus className={`m-2 size-5`}/>
                         <div className={`flex flex-col items-start`}>
-                            <span className={`text-sm font-semibold cursor-point`}>新建文档</span>
+                            <span className={`text-sm font-semibold cursor-pointer`}>新建文档</span>
                             <span className={`text-xs text-slate-400/80`}>
                                 文档、表格、画板、数据表
                             </span>
@@ -69,7 +69,7 @@ const StarCardNewDocumentItem = async () => {
                         <GrDocumentText className={`size-4`}/>
                         <Dialog>
                             <DialogTrigger>
-                                <span>新建文档</span>
+                                <span className={`cursor-pointer`}>新建文档</span>
                             </DialogTrigger>
                             <DialogContent>
                                 <DialogHeader>
