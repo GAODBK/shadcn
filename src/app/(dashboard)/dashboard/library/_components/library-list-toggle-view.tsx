@@ -5,12 +5,11 @@ import {Separator} from "@/components/ui/separator";
 import {MdFormatListBulleted} from "react-icons/md";
 import Link from "next/link";
 
-const LibraryListToggleView = () => {
+const LibraryListToggleView = ({view}: { view: string }) => {
     return (
         <>
             <Link href={`/dashboard/library?view=group`}
-                className={`
-                                  "inline-flex items-center justify-center 
+                  className={` inline-flex items-center justify-center 
                                   whitespace-nowrap rounded-md px-3 py-1 text-sm 
                                   font-medium ring-offset-background transition-all
                                    focus-visible:outline-none focus-visible:ring-2 
@@ -18,14 +17,13 @@ const LibraryListToggleView = () => {
                                     disabled:pointer-events-none disabled:opacity-50
                                      data-[state=active]:bg-background 
                                      data-[state=active]:text-foreground
-                                      data-[state=active]:shadow",
-                            `}>
+                                      data-[state=active]:shadow ${view !== 'list' && `bg-gray-300/30`}`
+                  }>
                 <AiOutlineAppstore className={`size-5`}/>
             </Link>
             <Separator orientation={'vertical'} className={`mx-2`}/>
             <Link href={`/dashboard/library?view=list`}
-                className={`
-                                  "inline-flex items-center justify-center 
+                  className={` inline-flex items-center justify-center 
                                   whitespace-nowrap rounded-md px-3 py-1 text-sm 
                                   font-medium ring-offset-background transition-all
                                    focus-visible:outline-none focus-visible:ring-2 
@@ -33,8 +31,8 @@ const LibraryListToggleView = () => {
                                     disabled:pointer-events-none disabled:opacity-50
                                      data-[state=active]:bg-background 
                                      data-[state=active]:text-foreground
-                                      data-[state=active]:shadow",
-                            `}>
+                                      data-[state=active]:shadow ${view === 'list' && `bg-gray-300/30`}`
+                  }>
                 <MdFormatListBulleted className={`size-5`}/>
             </Link>
         </>

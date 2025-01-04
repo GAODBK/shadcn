@@ -45,7 +45,7 @@ const LibraryList = ({view, libraries}: {
                     {view !== 'list' && <LibraryListNewIcons/>}
                     {view === 'list' && <LibraryListNewCardButton/>}
                     <TabsList>
-                        <LibraryListToggleView/>
+                        <LibraryListToggleView view={view}/>
                     </TabsList>
                 </div>
                 <TabsContent value="my" className={`my-6 w-full flex-wrap flex flex-row items-center gap-4`}>
