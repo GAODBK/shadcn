@@ -21,6 +21,7 @@
     "@huggingface/inference": "^2.8.1",
     "@langchain/community": "^0.3.17",
     "@langchain/core": "^0.3.22",
+    "@langchain/openai": "^0.3.16",
     "@liveblocks/client": "2.12.2",
     "@liveblocks/react": "2.12.2",
     "@liveblocks/react-tiptap": "2.12.2",

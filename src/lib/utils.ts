@@ -1,15 +1,33 @@
 import {clsx, type ClassValue} from "clsx"
 import {twMerge} from "tailwind-merge"
 import {useCallback} from "react";
+import {Editor} from "@tiptap/react";
 
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs))
 }
 
+export function generateImage(editor: Editor, url: string) {
+    editor.chain().focus().setImage({
+        src: url
+    }).run();
+}
+
+export function generateImageAPI(prompt:string) {
+    return fetch('/api/generate-image', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({prompt}),
+    })
+}
+
+
 // 黏贴图片
 // @ts-ignore
-export async function pasteImage(_event, editor, slug) {
+export async function pasteImage(_event, editor: Editor, slug: string) {
 
     const clipboardItems = await navigator.clipboard.read()
     // const fileList: File[] = []

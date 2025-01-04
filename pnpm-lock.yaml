@@ -41,6 +41,9 @@ importers:
       '@langchain/core':
         specifier: ^0.3.22
         version: 0.3.26(openai@4.77.0(encoding@0.1.13)(zod@3.24.1))
+      '@langchain/openai':
+        specifier: ^0.3.16
+        version: 0.3.16(@langchain/core@0.3.26(openai@4.77.0(encoding@0.1.13)(zod@3.24.1)))(encoding@0.1.13)
       '@liveblocks/client':
         specifier: 2.12.2
         version: 2.12.2

@@ -10,7 +10,7 @@ import {RichTextEditor, Link} from '@mantine/tiptap';
 import StarterKit from '@tiptap/starter-kit';
 
 import '@mantine/core/styles.css';
-import {pasteImage} from "@/lib/utils";
+import {generateImage, generateImageAPI, pasteImage} from "@/lib/utils";
 import MantineFloatingToolbar from "@/components/tiptap/bar/MantineFloatingToolbar";
 import MantineBubbleToolbar from "@/components/tiptap/bar/MantineBubbleToolbar";
 import BarItems from "@/components/tiptap/item/BarItems";
@@ -40,6 +40,24 @@ const TipTap = ({description, onChange, slug, onSubmit}: {
                             // const prompt = this.editor.getText().slice(-30)
                             // console.log(prompt)
                             complete(prompt)
+                            return true
+                        },
+                        'Ctrl-shift-a': () => {
+                            const prompt = this.editor.getText().slice(-120);
+                            generateImageAPI(prompt)
+                                .then(async response => {
+                                    const data = await response.json();
+                                    if (response.ok) {
+                                        console.log('Image URL:', data.url);
+                                        // 在页面上显示图片
+                                        generateImage(this.editor, data.url);
+                                    } else {
+                                        console.error('Error:', data.error);
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Fetch error:', error);
+                                });
                             return true
                         },
                         'Ctrl-shift-s': () => {
