@@ -7,7 +7,7 @@ import {db} from "@/lib/db";
 
 const Page = async ({searchParams}: {
     searchParams: {
-        view: string
+        view: 'group'|'list'
     }
 }) => {
     const libraries = await db.library.findMany({

@@ -3,7 +3,13 @@
 import React, {useState} from 'react';
 import {Note} from "@prisma/client";
 import {db} from "@/lib/db";
-import {ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger} from "@/components/ui/context-menu";
+import {
+    ContextMenu,
+    ContextMenuContent,
+    ContextMenuItem,
+    ContextMenuSeparator,
+    ContextMenuTrigger
+} from "@/components/ui/context-menu";
 import {cn} from "@/lib/utils";
 import Link from "next/link";
 import {
@@ -13,6 +19,7 @@ import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/co
 import {Input} from "@/components/ui/input";
 import {updateNote} from "@/app/(knowledge)/[username]/[libraryId]/[noteId]/actions/update-note";
 import {usePathname, useRouter} from "next/navigation";
+import {deleteNote} from "@/app/(knowledge)/[username]/[libraryId]/actions/delete-note";
 
 const SidebarDirLiteItem = ({notes, libraryId, level = 0}: {
     notes: Note[]
@@ -72,6 +79,15 @@ const SidebarDirLiteItem = ({notes, libraryId, level = 0}: {
                                                     >
                                                         新建文档
                                                     </ContextMenuItem>
+                                                    <ContextMenuSeparator/>
+                                                    <ContextMenuItem
+                                                        onClick={async () => {
+                                                            await deleteNote(item.id)
+                                                            router.refresh()
+                                                        }}
+                                                    >
+                                                        删除
+                                                    </ContextMenuItem>
                                                 </ContextMenuContent>
                                             </ContextMenu>
                                         </AccordionTrigger>
@@ -114,7 +130,7 @@ const SidebarDirLiteItem = ({notes, libraryId, level = 0}: {
                                         <div
                                             className={cn(
                                                 `w-full text-sm p-2 pt-2 px-${level + 4}
-                                     hover:bg-gray-300/30 rounded-md`,
+                                                hover:bg-gray-300/30 rounded-md`,
                                                 pathname === `/malred/${libraryId}/${item.id}` && `bg-gray-300/30`
                                             )}
                                             key={item.id}>
@@ -139,6 +155,15 @@ const SidebarDirLiteItem = ({notes, libraryId, level = 0}: {
                                             }}
                                         >
                                             新建文档
+                                        </ContextMenuItem>
+                                        <ContextMenuSeparator/>
+                                        <ContextMenuItem
+                                            onClick={async () => {
+                                                await deleteNote(item.id)
+                                                router.refresh()
+                                            }}
+                                        >
+                                            删除
                                         </ContextMenuItem>
                                     </ContextMenuContent>
                                 </ContextMenu>

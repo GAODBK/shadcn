@@ -77,7 +77,7 @@ const Sidebar = () => {
                                         <CommandGroup heading="空间">
                                             <CommandItem>
                                                 <Link
-                                                    href={``}
+                                                    href={`/`}
                                                     className={`gap-x-2 flex items-center`}>
                                                     <div className={`flex items-center justify-center 
                                                 size-7 bg-sky-400 rounded-md`}>

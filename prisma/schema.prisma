@@ -29,9 +29,11 @@ model Library {
   parentLibraryId String?
 
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   Note  Note[]
   Group Group[]
+  Excel Excel[]
 }
 
 // 知识库分组
@@ -50,6 +52,7 @@ model Group {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Excel     Excel[]
 }
 
 // 知识库笔记
@@ -60,7 +63,7 @@ model Note {
   text String @db.LongText
 
   libraryId String
-  library   Library @relation(fields: [libraryId], references: [id])
+  library   Library @relation(fields: [libraryId], references: [id], onDelete: Cascade)
 
   childrenNote Note[]  @relation("ParentChildrenNote")
   // 级联删除
@@ -68,7 +71,25 @@ model Note {
   parentNoteId String?
 
   groupId String?
-  group   Group?  @relation(fields: [groupId], references: [id])
+  group   Group?  @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// 表格
+model Excel {
+  id String @id @default(cuid())
+
+  name String
+  // 本地路径
+  url  String
+
+  libraryId String
+  library   Library @relation(fields: [libraryId], references: [id], onDelete: Cascade)
+
+  groupId String?
+  group   Group?  @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
