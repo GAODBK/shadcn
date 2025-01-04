@@ -128,23 +128,17 @@ const TipTap = ({description, onChange, slug, onSubmit}: {
     const {complete, completion} = useCompletion({
         api: 'http://localhost:3000/api/completion',
     })
-    // const lastCompletion = useRef('')
-    const [lastCompletion, setLastCompletion] = useState('')
-    useDebounce(complete, 1000, [lastCompletion]);
-    const updateEditorCompletion = (completion: string, editor: Editor) => {
-        // 新的completion(ai之前生成的sentence + ai生成的新的char) 减去 上次的completion的长度
-        // 得出新的char
-        const diff = completion.slice(lastCompletion.length);
-        // 更新lastCompletion
-        // lastCompletion.current = completion;
-        setLastCompletion(completion)
-        // 当前editor后面加上新char
-        editor.commands.insertContent(diff);
-    }
-    useDebounce(updateEditorCompletion, 1000, [completion, editor]);
+
+    const lastCompletion = useRef('')
     useEffect(() => {
         if (!editor || !completion) return
-        updateEditorCompletion(completion, editor)
+        // 新的completion(ai之前生成的sentence + ai生成的新的char) 减去 上次的completion的长度
+        // 得出新的char
+        const diff = completion.slice(lastCompletion.current.length);
+        // 更新lastCompletion
+        lastCompletion.current = completion;
+        // 当前editor后面加上新char
+        editor.commands.insertContent(diff);
     }, [completion, editor])
 
     // 防止编辑器未加载时操作出错
