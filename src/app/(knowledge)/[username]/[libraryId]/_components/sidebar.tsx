@@ -121,7 +121,10 @@ const Sidebar = async ({libraryId}: { libraryId: string }) => {
             </div>
             <Separator/>
             <div className={`pt-4`}>
-                <SidebarSearchInput/>
+                <SidebarSearchInput
+                    notes={notes}
+                    library={library}
+                />
             </div>
             <div className={`flex flex-col py-4 items-center gap-y-2`}>
                 <SidebarHomeItem libraryId={libraryId}/>

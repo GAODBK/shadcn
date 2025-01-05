@@ -17,7 +17,7 @@ const OutlineButton = ({outline}: { outline: string }) => {
                                 cursor-pointer p-1 rounded-md`}
                 />
             </div>
-            {show && <div className={`sticky right-0 top-4 h-full w-[14vw] prose`}
+            {show && <div className={`sticky right-0 top-4 h-full min-w-[14vw] max-w-[20vw] prose`}
                           dangerouslySetInnerHTML={{__html: outline}}
             />}
         </>

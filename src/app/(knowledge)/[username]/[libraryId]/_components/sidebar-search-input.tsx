@@ -26,8 +26,17 @@ import {GrDocumentText} from "react-icons/gr";
 import {LuBookMarked, LuClipboardPenLine, LuTableProperties} from "react-icons/lu";
 import {FcImport, FcPuzzle} from "react-icons/fc";
 import {RiRobot2Line} from "react-icons/ri";
+import {Library, Note} from '@prisma/client';
+import SidebarSearchInputCommandItem
+    from "@/app/(knowledge)/[username]/[libraryId]/_components/sidebar-search-input-command-item";
+import SidebarSearchInputNewDocItem
+    from "@/app/(knowledge)/[username]/[libraryId]/_components/sidebar-search-input-new-doc-item";
 
-const SidebarSearchInput = () => {
+const SidebarSearchInput = ({library, notes}: {
+    library: Library
+    notes: Note[]
+}) => {
+
     return (
         <div className={`flex items-center gap-x-2 mx-4`}>
             <Dialog>
@@ -36,12 +45,14 @@ const SidebarSearchInput = () => {
                 </DialogTrigger>
                 <DialogContent className={`p-0`}>
                     <Command className="rounded-lg border shadow-md md:min-w-[450px]">
-                        <CommandInput placeholder="Type a command or search..."/>
+                        <CommandInput placeholder="搜索笔记"/>
                         <CommandList>
                             <CommandEmpty>No results found.</CommandEmpty>
                             <CommandGroup heading="页面">
-                                {/*todo: library children*/}
-
+                                <SidebarSearchInputCommandItem
+                                    notes={notes}
+                                    libraryId={library.id}
+                                />
                             </CommandGroup>
                         </CommandList>
                     </Command>
@@ -55,10 +66,7 @@ const SidebarSearchInput = () => {
                         <GoPlus className={`size-6`}/>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className={`py-4 px-2`}>
-                        <DropdownMenuItem>
-                            <GrDocumentText/>
-                            文档
-                        </DropdownMenuItem>
+                        <SidebarSearchInputNewDocItem libraryId={library.id}/>
                         <DropdownMenuItem>
                             <LuTableProperties/>
                             {/*<FcViewDetails/>*/}

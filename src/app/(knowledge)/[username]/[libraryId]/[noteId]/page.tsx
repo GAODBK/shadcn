@@ -10,6 +10,8 @@ import katex from "katex";
 import {generateOutlineLevel} from "@/lib/utils";
 import {CiBoxList} from "react-icons/ci";
 import OutlineButton from "@/app/(knowledge)/[username]/[libraryId]/[noteId]/_components/outline-button";
+import '@/app/(knowledge)/[username]/[libraryId]/style.scss'
+import '@mantine/tiptap/styles.css';
 
 const Page = async ({params, searchParams}: {
     params: {
@@ -121,7 +123,7 @@ const Page = async ({params, searchParams}: {
                                 </>
                             }
                             {!note?.text && (
-                                <span>暂无内容</span>
+                                <div className={`size-full`}>暂无内容</div>
                             )}
                         </div>
                     </div>}
