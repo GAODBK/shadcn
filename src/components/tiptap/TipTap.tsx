@@ -4,7 +4,9 @@ import Text from '@tiptap/extension-text'
 import React, {useEffect, useRef, useState} from 'react';
 import {useEditorStore} from "@/hooks/use-editor-store";
 import {Editor, EditorContent, useEditor} from "@tiptap/react";
-import {TiptapExtensions} from '@/lib/constants';
+import {getRandomColor, getRandomName, TiptapExtensions} from '@/lib/constants';
+import {Collaboration} from "@tiptap/extension-collaboration";
+import {CollaborationCursor} from "@tiptap/extension-collaboration-cursor";
 import {useCompletion} from "ai/react"; // pnpm i ai@3.4.33
 import {RichTextEditor, Link} from '@mantine/tiptap';
 import StarterKit from '@tiptap/starter-kit';
@@ -16,11 +18,12 @@ import MantineBubbleToolbar from "@/components/tiptap/bar/MantineBubbleToolbar";
 import BarItems from "@/components/tiptap/item/BarItems";
 import {useDebounce} from "react-use";
 
-const TipTap = ({description, onChange, slug, onSubmit}: {
+const TipTap = ({description, onChange, slug, onSubmit, provider}: {
     description: string
     onChange: (richText: string) => void
     onSubmit: () => Promise<void>
     slug: string
+    provider?: any
 }) => {
     const {setEditor} = useEditorStore()
 
@@ -80,6 +83,19 @@ const TipTap = ({description, onChange, slug, onSubmit}: {
                     }
                 }
             }),
+            // Register the document with Tiptap
+            Collaboration.configure({
+                document: provider.document,
+            }),
+            // Register the collaboration cursor extension
+            CollaborationCursor.configure({
+                provider: provider,
+                user: {
+                    // todo: username
+                    name: getRandomName(),
+                    color: getRandomColor(),
+                },
+            }),
         ],
         autofocus: true,
         // 数据库获取富文本, 直接设置
@@ -97,31 +113,30 @@ const TipTap = ({description, onChange, slug, onSubmit}: {
             onChange(editor.getHTML())
             setEditor(editor)
         },
-        // onSelectionUpdate({editor}) {
-        //     // 保存到外部变量, 方便外部保存数据库
-        //     onChange(editor.getHTML())
-        //     setEditor(editor)
-        // },
-        // onTransaction({editor}) {
-        //     // 保存到外部变量, 方便外部保存数据库
-        //     onChange(editor.getHTML())
-        //     setEditor(editor)
-        // },
-        // onFocus({editor}) {
-        //     // 保存到外部变量, 方便外部保存数据库
-        //     onChange(editor.getHTML())
-        //     setEditor(editor)
-        // },
-        // onBlur({editor}) {
-        //     // 保存到外部变量, 方便外部保存数据库
-        //     onChange(editor.getHTML())
-        //     setEditor(editor)
-        // },
-        // onContentError({editor}) {
-        //     // 保存到外部变量, 方便外部保存数据库
-        //     onChange(editor.getHTML())
-        //     setEditor(editor)
-        // },
+        // error时退出
+        onContentError({disableCollaboration}) {
+            disableCollaboration()
+        },
+        onSelectionUpdate({editor}) {
+            // 保存到外部变量, 方便外部保存数据库
+            //     onChange(editor.getHTML())
+            setEditor(editor)
+        },
+        onTransaction({editor}) {
+            // 保存到外部变量, 方便外部保存数据库
+            //     onChange(editor.getHTML())
+            setEditor(editor)
+        },
+        onFocus({editor}) {
+            // 保存到外部变量, 方便外部保存数据库
+            //     onChange(editor.getHTML())
+            setEditor(editor)
+        },
+        onBlur({editor}) {
+            // 保存到外部变量, 方便外部保存数据库
+            //     onChange(editor.getHTML())
+            setEditor(editor)
+        },
     })
 
     // ai代写

@@ -117,7 +117,7 @@ export const addFileLinkWrapper = (editor) => useCallback(() => {
 // eslint-disable-next-line react-hooks/rules-of-hooks
 // @ts-ignore
 export const addImageWrapper = (editor, slug) => useCallback(() => {
-    console.log(slug)
+    // console.log(slug)
     const fileInput = document.createElement('input');
     fileInput.type = 'file';
     fileInput.accept = 'image/*';

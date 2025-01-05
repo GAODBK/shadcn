@@ -5,7 +5,7 @@ import {JSDOM} from "jsdom";
 
 export const POST = async (res: NextRequest) => {
     const body = await res.json()
-    console.log(body.richText)
+    // console.log(body.richText)
     let richText = body.richText
 
     const dom = new JSDOM(richText);

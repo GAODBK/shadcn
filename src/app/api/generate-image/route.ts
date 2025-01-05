@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
         });
 
         const data = await response.json();
-        console.log(data)
+        // console.log(data)
         const imageUrl = data.data[0].url;
 
         // 下载并保存图片

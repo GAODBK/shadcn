@@ -14,7 +14,7 @@ import {LuTableProperties} from "react-icons/lu";
 import {Library} from "@prisma/client";
 
 const LibraryUse = ({libraries}: { libraries: Library[] }) => {
-    console.log(libraries)
+    // console.log(libraries)
 
     return (
         <>
