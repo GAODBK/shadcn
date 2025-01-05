@@ -82,7 +82,8 @@ const Page = async ({params, searchParams}: Props) => {
             note: true
         }
     })
-    let current: NoteHistory | undefined = undefined
+    // 默认第一个
+    let current: NoteHistory | undefined = histories[0]
     if (searchParams.h) {
         current = histories.filter(h => h.id === searchParams.h)[0]
     }
