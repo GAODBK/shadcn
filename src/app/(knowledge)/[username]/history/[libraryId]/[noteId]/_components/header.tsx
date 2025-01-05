@@ -25,8 +25,15 @@ const Header = ({history}: { history: NoteHistory | undefined }) => {
         <div className={`sticky z-50 top-0 h-16 bg-white p-2 border-b shadow-md px-4 w-full
          flex items-center justify-between`}>
             <div className={`flex gap-x-2 items-center`}>
-                <FaChevronLeft className={`size-5 cursor-pointer`}
-                               onClick={() => router.back()}/>
+                <FaChevronLeft
+                    className={`size-5 cursor-pointer`}
+                    onClick={() => {
+                        // router.back()
+                        // @ts-ignore
+                        router.push(`/malred/${history.note.libraryId}/${history.noteId}`)
+                        router.refresh()
+                    }}
+                />
                 <span>历史记录</span>
             </div>
             <AlertDialog>
