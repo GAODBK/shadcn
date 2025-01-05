@@ -38,4 +38,11 @@ pnpm install @mantine/tiptap @mantine/core @mantine/hooks @tiptap/react @tiptap/
 pnpm i sass
 ```
 
-todo: 首页从数据库读数据, 知识库首页sidebar面包屑
+# todo:
+
+- langchain rag 多模态输入 base64
+- 智谱图像理解模型
+- 协作编辑
+- template
+
+

@@ -42,18 +42,18 @@ const BarItems = ({editor, isBubble = false, isFloat = false}) => {
                 <RichTextEditor.Strikethrough/>
                 <RichTextEditor.ClearFormatting/>
                 {/*<RichTextEditor.Highlight />*/}
-                <RichTextEditor.Control
-                    // onClick={() => editor?.commands.insertContent('⭐')}
-                    // aria-label="Insert star emoji"
-                    // title="Insert star emoji"
-                >
+                {/*<RichTextEditor.Control */}
+                {/*>*/}
+                {/*    <FontHighLightBarItem size={'sm'}/>*/}
+                {/*</RichTextEditor.Control>*/}
+                <RichTextEditor.Control    >
                     <FontHighLightBarItem size={'sm'}/>
                 </RichTextEditor.Control>
                 <RichTextEditor.Control
                 >
                     <FontColorBarItem size={'sm'}/>
                 </RichTextEditor.Control>
-                {/*<RichTextEditor.Code />*/}
+                <RichTextEditor.CodeBlock />
                 <RichTextEditor.Control
                     // onClick={() => editor?.commands.insertContent('⭐')}
                     // aria-label="Insert star emoji"

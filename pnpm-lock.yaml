@@ -572,9 +572,6 @@ importers:
       recharts:
         specifier: ^2.15.0
         version: 2.15.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      sass:
-        specifier: ^1.83.0
-        version: 1.83.0
       sonner:
         specifier: ^1.7.1
         version: 1.7.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -675,6 +672,9 @@ importers:
       prisma:
         specifier: ^5.7.1
         version: 5.22.0
+      sass:
+        specifier: ^1.83.0
+        version: 1.83.0
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.17

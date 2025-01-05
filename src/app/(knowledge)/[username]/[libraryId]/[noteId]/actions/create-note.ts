@@ -1,5 +1,6 @@
 // src/app/(knowledge)/[username]/[libraryId]/[noteId]/actions/create-note.ts
 'use server';
+import {storeNoteHistory} from "@/app/(knowledge)/[username]/history/[libraryId]/[noteId]/actions/store-note-history";
 
 import {db} from '@/lib/db'
 
@@ -10,11 +11,15 @@ interface Props {
 }
 
 export const createNote = async (value: Props) => {
-    return db.note.create({
+    const note = await db.note.create({
         data: {
             ...value,
             name: '无标题文档',
             text: '',
         }
     })
+    // 历史记录
+    await storeNoteHistory(note);
+
+    return note
 }

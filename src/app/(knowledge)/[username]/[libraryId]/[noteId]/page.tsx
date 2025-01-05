@@ -85,7 +85,7 @@ const Page = async ({params, searchParams}: {
             'Content-Type': 'application/json'
         }
     })
-    const {full, outline,rich} = await data.json();
+    const {full, outline, rich} = await data.json();
 
     return (
         <div className={`size-full flex`}>
@@ -107,14 +107,19 @@ const Page = async ({params, searchParams}: {
                                 {note?.name}
                             </h1>
                         }
-                        <div className={`px-6 py-2 w-full flex`}>
-                            <div
-                                id={`tiptap-content`}
-                                className={`p-12 prose-lg`}
-                                dangerouslySetInnerHTML={{
-                                    __html: rich
-                                }}/>
-                            <OutlineButton outline={outline}/>
+                        <div className={`px-6 py-2 w-full flex justify-between`}>
+                            {note?.text &&
+                                <>
+                                    <div
+                                        id={`tiptap-content`}
+                                        className={`p-12 prose-lg`}
+                                        dangerouslySetInnerHTML={{
+                                            __html: rich
+                                        }}/>
+                                    <div className={`flex-1`}/>
+                                    <OutlineButton outline={outline}/>
+                                </>
+                            }
                             {!note?.text && (
                                 <span>暂无内容</span>
                             )}

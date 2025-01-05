@@ -29,7 +29,7 @@ export default function MantineFloatingToolbar({editor}) {
                         <RichTextEditor.Italic/>
                         <RichTextEditor.Underline/>
                         <RichTextEditor.Strikethrough/>
-                        <RichTextEditor.Code/>
+                        <RichTextEditor.CodeBlock/>
 
                         <RichTextEditor.Blockquote/>
                         <RichTextEditor.Hr/>

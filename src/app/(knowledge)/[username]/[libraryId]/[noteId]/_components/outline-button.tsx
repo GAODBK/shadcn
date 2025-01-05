@@ -8,7 +8,7 @@ const OutlineButton = ({outline}: { outline: string }) => {
 
     return (
         <>
-            <div className={`sticky h-12 top-0`}>
+            <div className={`sticky h-12 top-0 right-0`}>
                 <CiBoxList
                     onClick={() => {
                         setShow(!show)
@@ -17,7 +17,7 @@ const OutlineButton = ({outline}: { outline: string }) => {
                                 cursor-pointer p-1 rounded-md`}
                 />
             </div>
-            {show && <div className={`sticky top-4 size-full w-[40vw] prose`}
+            {show && <div className={`sticky right-0 top-4 h-full w-[14vw] prose`}
                           dangerouslySetInnerHTML={{__html: outline}}
             />}
         </>
