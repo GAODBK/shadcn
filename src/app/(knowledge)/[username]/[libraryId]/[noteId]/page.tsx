@@ -8,6 +8,8 @@ import {JSDOM} from "jsdom";
 import hljs from "highlight.js";
 import katex from "katex";
 import {generateOutlineLevel} from "@/lib/utils";
+import {CiBoxList} from "react-icons/ci";
+import OutlineButton from "@/app/(knowledge)/[username]/[libraryId]/[noteId]/_components/outline-button";
 
 const Page = async ({params, searchParams}: {
     params: {
@@ -71,8 +73,8 @@ const Page = async ({params, searchParams}: {
 
     const note = await db.note.findUnique({where: {id: params.noteId}})
 
-    const richText = renderRichTextWithHighlightServerside(renderMathInText(note?.text || '')
-    )
+    const richText = renderRichTextWithHighlightServerside(renderMathInText(note?.text || ''))
+
     // let {full: __html} = generateOutlineLevel(richText)
     const data = await fetch(`http://localhost:3000/api/outline/generate`, {
         method: 'POST',
@@ -83,7 +85,7 @@ const Page = async ({params, searchParams}: {
             'Content-Type': 'application/json'
         }
     })
-    const {full: __html} = await data.json();
+    const {full, outline,rich} = await data.json();
 
     return (
         <div className={`size-full flex`}>
@@ -105,13 +107,14 @@ const Page = async ({params, searchParams}: {
                                 {note?.name}
                             </h1>
                         }
-                        <div className={`px-6 py-2 w-full`}>
+                        <div className={`px-6 py-2 w-full flex`}>
                             <div
                                 id={`tiptap-content`}
-                                className={`p-12 w-full prose-lg`}
+                                className={`p-12 prose-lg`}
                                 dangerouslySetInnerHTML={{
-                                    __html
+                                    __html: rich
                                 }}/>
+                            <OutlineButton outline={outline}/>
                             {!note?.text && (
                                 <span>暂无内容</span>
                             )}

@@ -93,12 +93,16 @@ const NoteHomeHeader = ({id, text, libraryId, name}: {
                                         <VscNotebookTemplate className={`size-5`}/>
                                         <span>另存为模板</span>
                                     </div>
-                                    <div className={`p-2 rounded-md cursor-pointer
-                                    flex items-center hover:bg-slate-300/30 gap-x-2
-                                    `}>
-                                        <FaClockRotateLeft className={`size-5`}/>
-                                        <span>历史版本</span>
-                                    </div>
+                                    <Link
+                                        className={`w-full`}
+                                        href={`/malred/history/${libraryId}/${id}`}>
+                                        <div className={`p-2 rounded-md cursor-pointer
+                                            flex items-center hover:bg-slate-300/30 gap-x-2
+                                            `}>
+                                            <FaClockRotateLeft className={`size-5`}/>
+                                            <span>历史版本</span>
+                                        </div>
+                                    </Link>
                                     <div className={`p-2 rounded-md cursor-pointer
                                     flex items-center hover:bg-slate-300/30 gap-x-2
                                     `}>

@@ -14,7 +14,7 @@ const Page = ({params}: Props) => {
 
     return (
         <div>
-
+1
         </div>
     );
 };
