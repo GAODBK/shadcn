@@ -587,6 +587,9 @@ importers:
       tesseract.js:
         specifier: ^5.1.1
         version: 5.1.1(encoding@0.1.13)
+      tiptap-extension-global-drag-handle:
+        specifier: ^0.1.16
+        version: 0.1.16
       tiptap-extension-resize-image:
         specifier: 1.2.1
         version: 1.2.1(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))(@tiptap/extension-image@2.10.4(@tiptap/core@2.10.4(@tiptap/pm@2.10.4)))(@tiptap/pm@2.10.4)
@@ -7957,6 +7960,9 @@ packages:
 
   tippy.js@6.3.7:
     resolution: {integrity: sha512-E1d3oP2emgJ9dRQZdf3Kkn0qJgI6ZLpyS5z6ZkY1DF3kaQaBsGZsndEpHwx+eC+tYM41HaSNvNtLx8tU57FzTQ==}
+
+  tiptap-extension-global-drag-handle@0.1.16:
+    resolution: {integrity: sha512-Toke8gAgvgmSTmpU5Zome29ywdcIPxVZVkzI3GpUbaX8DF7o2ukyb+g/x5PAwBWQt/E4nhX91QlClo96psSYHQ==}
 
   tiptap-extension-resize-image@1.2.1:
     resolution: {integrity: sha512-SLMAujDa+0LN/6Iv2HtU4Uk0BL6LMh4b/r85frpdnjFDW2i6pIOfTVG8jzJQ8T1EgYHNn2YG1U2HoVAGuwLc3Q==}
@@ -16992,6 +16998,8 @@ snapshots:
   tippy.js@6.3.7:
     dependencies:
       '@popperjs/core': 2.11.8
+
+  tiptap-extension-global-drag-handle@0.1.16: {}
 
   tiptap-extension-resize-image@1.2.1(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))(@tiptap/extension-image@2.10.4(@tiptap/core@2.10.4(@tiptap/pm@2.10.4)))(@tiptap/pm@2.10.4):
     dependencies:

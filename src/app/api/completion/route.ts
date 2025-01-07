@@ -22,7 +22,8 @@ export async function POST(req: NextRequest) {
     const response = await openai.createChatCompletion({
         // model: 'gpt-4-turbo',
         // model: 'gpt-3.5-turbo',
-        model: 'lite', // xunfei
+        // model: 'lite', // xunfei
+        model: 'generalv3.5', // xunfei spark max 3.5
         // model: 'glm-4-flash',  // zhipu
         messages: [
             {

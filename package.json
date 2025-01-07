@@ -204,6 +204,7 @@
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "tesseract.js": "^5.1.1",
+    "tiptap-extension-global-drag-handle": "^0.1.16",
     "tiptap-extension-resize-image": "1.2.1",
     "tls": "^0.0.1",
     "turndown": "^7.2.0",
