@@ -6,8 +6,8 @@ compatibility_date = "2024-04-22"
 BLOG_USERNAME="admin"
 
 [[kv_namespaces]]
-binding = "blog"
-id = "8617f8968998499bb3db425063f8f01d"
+binding = "CFBLOG"
+id = "345a36d4412c429b9887eecd297a8ee7"
 
 # [[r2_buckets]]
 # binding = "MY_BUCKET"
