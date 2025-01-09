@@ -4,6 +4,7 @@ compatibility_date = "2024-04-22"
 
 [vars]
 BLOG_USERNAME="admin"
+BLOG_PASSWORD="123456"
 
 [[kv_namespaces]]
 binding = "CFBLOG"
