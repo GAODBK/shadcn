@@ -25,9 +25,9 @@ app.get('/', (c) => {
 app.route('/', createBlogServer({
   defaultOGImage: 'https://tgimgbed-f3l.pages.dev/file/1735809570871_06765f5349c7f7a453c4c8c0055aa452.gif',
   blogTitle: 'React Blog',
-  blogDescription: 分享有关 Honojs 故事的地方.',
+  blogDescription: 'jo 分享有关 Honojs 故事的地方.',
   urlPrefix: 'https://blog-97c.pages.dev',
-  publisher: 'https://sfghgh.pages.dev/',
+  publisher: 'https://sfghgh.pages.dev',
 }))
 
 export default app
