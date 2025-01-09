@@ -23,11 +23,11 @@ app.get('/', (c) => {
 
 // todo you need change the blog server user name and password
 app.route('/', createBlogServer({
-  defaultOGImage: 'https://aicanvas.app/statics/uploads/1732953286728187318_blog_banner.jpg',
-  blogTitle: 'Hono React Blog',
-  blogDescription: 'A place to share stories about Honojs.',
-  urlPrefix: 'https://hono-react-ssr-shadcn-ui.pages.dev',
-  publisher: 'https://x.com/dotcopilot_ai',
+  defaultOGImage: 'https://tgimgbed-f3l.pages.dev/file/1735809570871_06765f5349c7f7a453c4c8c0055aa452.gif',
+  blogTitle: 'React Blog',
+  blogDescription: 分享有关 Honojs 故事的地方.',
+  urlPrefix: 'https://blog-97c.pages.dev',
+  publisher: 'https://sfghgh.pages.dev/',
 }))
 
 export default app
